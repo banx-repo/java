@@ -13,7 +13,7 @@ public class New {
     private static void print(boolean validate, String s) {
         System.out.println("\nThêm mới dữ liệu!!!\n");
         System.out.println("1. Thêm học viên");
-        System.out.println("2. ---");
+        System.out.println("2. Thêm môn học");
         System.out.println("3. ---");
         System.out.println("4. ---");
         System.out.println("5. ---");
@@ -56,8 +56,9 @@ public class New {
                 return;
             }
 
-            System.out.println(Pattern.matches("[a-zA-z ]", s));
-            if (s.length() > 0 && Pattern.matches("[a-zA-z ]{6,30}", s)) {
+            if (s.length() > 0 && Pattern.matches(
+                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{6,30}",
+                    s)) {
                 fullName = s;
                 validate = true;
                 break;
@@ -106,6 +107,50 @@ public class New {
     }
 
     /**
+     * Thêm môn học
+     * 
+     * @param in
+     */
+    private static void newSubject(Scanner in) {
+        String s = "";
+
+        boolean validate = true;
+
+        while (true) {
+            System.out.println("\nThêm môn học mới!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.printf("Tên môn học (3 - 50 ký tự và số, không bao gồm ký tự đặc biệt): ");
+            s = in.nextLine().trim();
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy");
+                return;
+            }
+
+            if (s.length() > 0 && Pattern.matches(
+                    "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{3,50}",
+                    s)) {
+                break;
+            }
+
+            validate = false;
+        }
+
+        int index = Subject.getTotal();
+        int id = Subject.getNewId();
+
+        Main.subjects[index] = new Subject(id, s);
+        System.out.println("\nĐã thêm môn học thành công!");
+        System.out.print("\nBấm 'Enter' để tiếp tục....");
+        in.nextLine();
+    }
+
+    /**
      * Công cụ thêm mới dữ liệu.
      * 
      * @param in
@@ -142,7 +187,7 @@ public class New {
                     break;
 
                 case 2:
-                    System.out.println("---");
+                    newSubject(in);
                     break;
 
                 case 3:

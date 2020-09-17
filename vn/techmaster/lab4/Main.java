@@ -15,8 +15,8 @@ public class Main {
         System.out.println("\nChương trình quản lý lớp học Techmaster!!!\n");
         System.out.println("1. Xem dữ liệu");
         System.out.println("2. Thêm dữ liệu");
-        System.out.println("3. Cập nhật dữ liệu");
-        System.out.println("4. Xóa dữ liệu");
+        System.out.println("3. ---");
+        System.out.println("4. ---");
         System.out.println("\nNhập 'q' để thoát chương trình!\n");
 
         if (!validate) {
@@ -64,11 +64,11 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Cập nhật dữ liệu");
+                    System.out.println("---");
                     break;
 
                 case 4:
-                    System.out.println("Xóa dữ liệu");
+                    System.out.println("---");
                     break;
 
                 default:

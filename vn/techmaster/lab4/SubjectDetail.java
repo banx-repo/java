@@ -2,7 +2,7 @@ package vn.techmaster.lab4;
 
 import java.util.Scanner;
 
-public class StudentDetail {
+public class SubjectDetail {
     /**
      * Hiển thị nội dung hướng dẫn sử dụng chức năng
      * 
@@ -10,8 +10,8 @@ public class StudentDetail {
      * @param s
      */
     private static void print(boolean validate, String s) {
-        System.out.println("\nThông tin học viên!!!\n");
-        System.out.println("1. Toàn bộ học viên");
+        System.out.println("\nThông tin môn học!!!\n");
+        System.out.println("1. Toàn bộ môn học");
         System.out.println("2. ---");
         System.out.println("3. ---");
         System.out.println("4. ---");
@@ -28,16 +28,16 @@ public class StudentDetail {
     }
 
     private static void all(Scanner in) {
-        if (Student.getTotal() <= 0) {
-            System.out.println("\nChưa có học viên... @@");
+        if (Subject.getTotal() <= 0) {
+            System.out.println("\nChưa có môn học... @@");
             System.out.print("\nBấm 'Enter' để tiếp tục...");
             in.nextLine();
             return;
         }
 
-        System.out.printf("\n%4s  %4s  %-30s\n", "ID", "Tuổi", "Họ tên");
-        for (int i = 0; i < Student.getTotal(); i++) {
-            Main.students[i].print();
+        System.out.printf("\n%4s  %-50s\n", "ID", "Tên môn học");
+        for (int i = 0; i < Subject.getTotal(); i++) {
+            Main.subjects[i].print();
         }
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();

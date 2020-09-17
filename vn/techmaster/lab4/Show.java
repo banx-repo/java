@@ -12,7 +12,7 @@ public class Show {
     private static void print(boolean validate, String s) {
         System.out.println("\nXem thông tin!!!\n");
         System.out.println("1. Thông tin học viên");
-        System.out.println("2. ---");
+        System.out.println("2. Thông tin môn học");
         System.out.println("3. ---");
         System.out.println("4. ---");
         System.out.println("5. ---");
@@ -59,7 +59,7 @@ public class Show {
                     break;
 
                 case 2:
-                    System.out.println("---");
+                    SubjectDetail.show(in);
                     break;
 
                 case 3:
