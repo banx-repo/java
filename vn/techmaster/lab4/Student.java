@@ -1,17 +1,34 @@
 package vn.techmaster.lab4;
 
+import java.util.Scanner;
+
 public class Student {
-    int id;
+    static int id;
     String fullName;
     int age;
 
     Student(int id, String fullName, int age) {
-        this.id = id;
         this.fullName = fullName;
         this.age = age;
     }
 
-    void hello() {
-        System.out.println("Hello, my name is " + this.fullName);
+    String getName(Scanner in) {
+        System.out.print("Student name: ");
+        return in.nextLine();
     }
+
+    int getAge(Scanner in) {
+        System.out.print("Student age: ");
+        return in.nextInt();
+    }
+
+    String getFullName() {
+        return this.fullName;
+    }
+
+    void setFullName(String name) {
+        this.fullName = name;
+    }
+
+    
 }

@@ -42,9 +42,5 @@ public class Main {
         System.out.println(a.room.address);
         System.out.println(a.subjectTeacher.teacher.fullName);
         System.out.println(b.course.name);
-
-        for (Student s : a.course.listStudents) {
-            s.hello();
-        }
     }
 }
