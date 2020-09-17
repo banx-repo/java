@@ -7,6 +7,13 @@ public class Enum {
         MON, TUE, WED, THU, FRI, SAT, SUN
     };
 
+    /**
+     * Khởi tạo lịch, trả về mảng 2 chiều với các phần tử kiểu ENUM là các thứ trong
+     * tuần.
+     * 
+     * @param daysOfMonth     - Số ngày trong tháng
+     * @param firstDayOfMonth - Thứ trùng với ngày mùng 1
+     */
     static Day[][] createCalendar(int daysOfMonth, Day firstDayOfMonth) {
         int daysOfWeek = 7;
         int weeksOfMonth = (int) Math.ceil((daysOfMonth + firstDayOfMonth.ordinal()) / (float) daysOfWeek);
@@ -33,6 +40,11 @@ public class Enum {
         return calendar;
     }
 
+    /**
+     * In bảng lịch ra màn hình console
+     * 
+     * @param calendar
+     */
     static void printCalendar(Day[][] calendar) {
         int length = calendar.length;
         int day = 1;
@@ -40,7 +52,7 @@ public class Enum {
         System.out.println();
 
         for (Day d : Day.values()) {
-            System.out.printf("%7s", d);
+            System.out.printf("%4s", d);
         }
 
         System.out.println();
@@ -49,13 +61,12 @@ public class Enum {
             StringBuilder stringBuilder = new StringBuilder();
 
             for (int j = 0; j < calendar[i].length; j++) {
-                String s = day + "-" + calendar[i][j];
-                stringBuilder.append(String.format("%7s", s));
+                stringBuilder.append(String.format("%4d", day));
                 day++;
             }
 
             if (i == 0) {
-                System.out.printf("%49s\n", stringBuilder);
+                System.out.printf("%28s\n", stringBuilder);
                 continue;
             }
 
@@ -63,6 +74,12 @@ public class Enum {
         }
     }
 
+    /**
+     * Trả về thứ trùng với ngày chỉ định
+     * 
+     * @param calendar
+     * @param day
+     */
     static Day getDay(Day[][] calendar, int day) {
         int week = 0;
 
@@ -78,6 +95,13 @@ public class Enum {
         return calendar[week][day - 1];
     }
 
+    /**
+     * So sánh 2 ngày trong tháng có phải cùng ngày trong tuần (thứ) hay không và in
+     * ra màn hình
+     * 
+     * @param calendar
+     * @param daysOfMonth
+     */
     static void compare(Day[][] calendar, int daysOfMonth) {
         Scanner scanner = new Scanner(System.in);
 
@@ -128,13 +152,13 @@ public class Enum {
     }
 
     public static void main(String[] args) {
-        int daysOfMonth = 31;
-        Day firstDayOfMonth = Day.SAT;
+        int daysOfMonth = 30;
+        Day firstDayOfMonth = Day.THU;
 
         Day[][] calendar = Enum.createCalendar(daysOfMonth, firstDayOfMonth);
 
         Enum.printCalendar(calendar);
 
-        compare(calendar, daysOfMonth);
+        Enum.compare(calendar, daysOfMonth);
     }
 }
