@@ -37,6 +37,14 @@ public class Enum {
         int length = calendar.length;
         int day = 1;
 
+        System.out.println();
+
+        for (Day d : Day.values()) {
+            System.out.printf("%7s", d);
+        }
+
+        System.out.println();
+
         for (int i = 0; i < length; i++) {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -70,16 +78,53 @@ public class Enum {
         return calendar[week][day - 1];
     }
 
-    static void compare(Day[][] calendar, int a, int b) {
-        Day da = getDay(calendar, a);
-        Day db = getDay(calendar, b);
+    static void compare(Day[][] calendar, int daysOfMonth) {
+        Scanner scanner = new Scanner(System.in);
 
-        if (da == db) {
-            System.out.printf("Yep! 2 ngày %d và %d cùng là thứ %s!\n", a, b, da);
+        System.out.println();
+        System.out.println("So sánh 2 ngày trong tháng có cùng thứ hay không?");
+        int da;
+        int db;
+
+        String msg = String.format("Ngày phải là số nguyên lớn hơn 0 và nhỏ hơn %d: ", daysOfMonth + 1);
+        int count = 0;
+
+        do {
+            System.out.print(count++ > 0 ? msg : "Ngày thứ nhất: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.print("Không hợp lệ! Vui lòng nhập lại: ");
+                scanner.next();
+            }
+
+            da = scanner.nextInt();
+
+        } while (da < 1 || da > daysOfMonth);
+
+        count = 0;
+
+        do {
+            System.out.print(count++ > 0 ? msg : "Ngày thứ hai: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.print("Không hợp lệ! Vui lòng nhập lại: ");
+                scanner.next();
+            }
+
+            db = scanner.nextInt();
+        } while (db < 1 || db > daysOfMonth);
+
+        scanner.close();
+
+        Day a = getDay(calendar, da);
+        Day b = getDay(calendar, db);
+
+        if (a == b) {
+            System.out.printf("Yep! 2 ngày %d và %d cùng là thứ %s!\n", da, db, a);
             return;
         }
 
-        System.out.printf("No! %d là thứ %s - %d là thứ %s\n", a, da, b, db);
+        System.out.printf("No! %d là thứ %s - %d là thứ %s\n", da, a, db, b);
     }
 
     public static void main(String[] args) {
@@ -90,14 +135,6 @@ public class Enum {
 
         Enum.printCalendar(calendar);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("So sánh 2 ngày trong tháng có cùng thứ hay không?");
-        System.out.print("Ngày 1: ");
-        int a = scanner.nextInt();
-        System.out.print("Ngày 2: ");
-        int b = scanner.nextInt();
-        scanner.close();
-
-        compare(calendar, a, b);
+        compare(calendar, daysOfMonth);
     }
 }
