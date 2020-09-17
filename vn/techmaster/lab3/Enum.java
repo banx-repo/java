@@ -15,6 +15,11 @@ public class Enum {
      * @param firstDayOfMonth - Thứ trùng với ngày mùng 1
      */
     static Day[][] createCalendar(int daysOfMonth, Day firstDayOfMonth) {
+        if (daysOfMonth < 28 || daysOfMonth > 31) {
+            System.err.println("Số ngày không hợp lệ!");
+            return new Day[][] {};
+        }
+
         int daysOfWeek = 7;
         int weeksOfMonth = (int) Math.ceil((daysOfMonth + firstDayOfMonth.ordinal()) / (float) daysOfWeek);
 
@@ -103,6 +108,10 @@ public class Enum {
      * @param daysOfMonth
      */
     static void compare(Day[][] calendar, int daysOfMonth) {
+        if (calendar.length <= 0) {
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println();
@@ -152,8 +161,8 @@ public class Enum {
     }
 
     public static void main(String[] args) {
-        int daysOfMonth = 30;
-        Day firstDayOfMonth = Day.THU;
+        int daysOfMonth = 31;
+        Day firstDayOfMonth = Day.TUE;
 
         Day[][] calendar = Enum.createCalendar(daysOfMonth, firstDayOfMonth);
 
