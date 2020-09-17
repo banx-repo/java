@@ -1,46 +1,81 @@
 package vn.techmaster.lab4;
 
-import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
+    static Student[] students = new Student[1000];
+    static Teacher[] teachers = new Teacher[50];
+    static Subject[] subjects = new Subject[50];
+    static Room[] rooms = new Room[20];
+    static SubjectTeacher[] subjectTeachers = new SubjectTeacher[500];
+    static Course[] courses = new Course[20];
+    static Class[] classes = new Class[50];
+
+    private static void print(boolean validate, String s) {
+        System.out.println("\nChương trình quản lý lớp học Techmaster!!!\n");
+        System.out.println("1. Xem dữ liệu");
+        System.out.println("2. Thêm dữ liệu");
+        System.out.println("3. Cập nhật dữ liệu");
+        System.out.println("4. Xóa dữ liệu");
+        System.out.println("\nNhập 'q' để thoát chương trình!\n");
+
+        if (!validate) {
+            System.out.println("'" + s + "' không hợp lệ!\n");
+        }
+
+        System.out.print("Chọn thao tác: ");
+    }
+
     public static void main(String[] args) {
-        Room lab2 = new Room("Java 1B", "Tầng 12A, Viwaseen, 48 Tố Hữu, Nam Từ Liêm, Hà Nội");
+        Scanner in = new Scanner(System.in);
+        int function = 0;
+        String s = "";
 
-        // students
-        Student beou = new Student(1, "Béo Ú", 29);
-        Student phuong = new Student(2, "Phuong", 24);
-        Student thai = new Student(3, "Thai", 25);
+        boolean quit = false;
+        boolean validate = true;
 
-        // subjects
-        Subject java = new Subject(1, "Java Full Stack");
-        Subject html = new Subject(2, "HTML5");
-        Subject css = new Subject(3, "CSS3");
-        Subject js = new Subject(4, "JavaScript");
+        do {
+            print(validate, s);
+            s = in.nextLine();
 
-        // teachers
-        Teacher minh = new Teacher(1, "Minh", new Subject[] { java });
-        Teacher thanh = new Teacher(2, "Thanh", new Subject[] { java });
-        Teacher ba = new Teacher(3, "Ba Nguyễn", new Subject[] { html, css, js });
+            if (s.equalsIgnoreCase("q")) {
+                System.out.println("Goodbye...");
+                quit = true;
+            }
 
-        // subject teacher
-        SubjectTeacher java1a = new SubjectTeacher(java, thanh);
-        SubjectTeacher java1b = new SubjectTeacher(java, minh);
-        SubjectTeacher html5 = new SubjectTeacher(html, ba);
-        SubjectTeacher css5 = new SubjectTeacher(css, ba);
-        SubjectTeacher js5 = new SubjectTeacher(js, ba);
+            try {
+                function = Integer.parseInt(s);
+                validate = true;
+            } catch (Exception e) {
+                validate = false;
+            }
 
-        // course
-        Course javaFullStack = new Course(1, "Java Full Stack", new SubjectTeacher[] { java1a, java1b },
-                new Student[] { beou, phuong, thai });
-        Course foundation = new Course(2, "Foundation Programing", new SubjectTeacher[] { html5, css5, js5 },
-                new Student[] {});
+            if (!validate) {
+                continue;
+            }
 
-        // class
-        Class a = new Class(1, new Date[] {}, lab2, javaFullStack, java1a, new Checking[] {});
-        Class b = new Class(2, new Date[] {}, lab2, foundation, html5, new Checking[] {});
+            switch (function) {
+                case 1:
+                    Show.choose(in);
+                    break;
 
-        System.out.println(a.room.address);
-        System.out.println(a.subjectTeacher.teacher.fullName);
-        System.out.println(b.course.name);
+                case 2:
+                    New.create(in);
+                    break;
+
+                case 3:
+                    System.out.println("Cập nhật dữ liệu");
+                    break;
+
+                case 4:
+                    System.out.println("Xóa dữ liệu");
+                    break;
+
+                default:
+                    validate = false;
+            }
+        } while (!quit);
+
+        in.close();
     }
 }

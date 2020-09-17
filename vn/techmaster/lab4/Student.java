@@ -1,34 +1,46 @@
 package vn.techmaster.lab4;
 
-import java.util.Scanner;
-
 public class Student {
-    static int id;
-    String fullName;
-    int age;
+    static private int count = 1;
+    private int id;
+    private String fullName;
+    private int age;
 
     Student(int id, String fullName, int age) {
+        this.id = id;
         this.fullName = fullName;
         this.age = age;
     }
 
-    String getName(Scanner in) {
-        System.out.print("Student name: ");
-        return in.nextLine();
+    void print() {
+        System.out.printf("%4s  %4s  %-30s\n", this.id, this.age, this.fullName);
     }
 
-    int getAge(Scanner in) {
-        System.out.print("Student age: ");
-        return in.nextInt();
+    static int getNewId() {
+        return count++;
+    }
+
+    static int getTotal() {
+        return count - 1;
+    }
+
+    int getId() {
+        return this.id;
     }
 
     String getFullName() {
         return this.fullName;
     }
 
-    void setFullName(String name) {
-        this.fullName = name;
+    void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    
+    int getAge() {
+        return this.age;
+    }
+
+    void setAge(int age) {
+        this.age = age;
+    }
 }
