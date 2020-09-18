@@ -12,8 +12,6 @@ public class RoomDetails {
     private static void print(boolean validate, String s) {
         System.out.println("\nThông tin phòng học!!!\n");
         System.out.println("1. Toàn bộ phòng học");
-        System.out.println("2. ---");
-        System.out.println("3. ---");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -68,14 +66,6 @@ public class RoomDetails {
             switch (function) {
                 case 1:
                     all(in);
-                    break;
-
-                case 2:
-                    System.out.println("---");
-                    break;
-
-                case 3:
-                    System.out.println("---");
                     break;
 
                 default:

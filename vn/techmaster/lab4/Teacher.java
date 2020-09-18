@@ -17,11 +17,15 @@ public class Teacher {
     }
 
     void print() {
-        StringBuilder sb = new StringBuilder();
-        for (Subject sj : listSubjects) {
-            sb.append(sj.getName() + ", ");
+        try {
+            StringBuilder sb = new StringBuilder();
+            for (Subject sj : listSubjects) {
+                sb.append(sj.getName() + ", ");
+            }
+            System.out.printf("%4s  %-30s  %s\n", this.id, this.fullName, sb);
+        } catch (Exception e) {
+            System.out.println("LoL");
         }
-        System.out.printf("%4s  %-30s  %s\n", this.id, this.fullName, sb);
     }
 
     static int getNewId() {

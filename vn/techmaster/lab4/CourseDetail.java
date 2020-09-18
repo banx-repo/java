@@ -2,7 +2,7 @@ package vn.techmaster.lab4;
 
 import java.util.Scanner;
 
-public class SubjectTeacherDetail {
+public class CourseDetail {
     /**
      * Hiển thị nội dung hướng dẫn sử dụng chức năng
      * 
@@ -10,10 +10,10 @@ public class SubjectTeacherDetail {
      * @param s
      */
     private static void print(boolean validate, String s) {
-        System.out.println("\nThông tin giảng viên bộ môn!!!\n");
-        System.out.println("1. Toàn bộ các giảng viên bộ môn");
-        System.out.println("2. Lọc danh sách theo môn");
-        System.out.println("3. Lọc danh sách theo giảng viên");
+        System.out.println("\nThông tin khóa học!!!\n");
+        System.out.println("1. Toàn bộ khóa học");
+        System.out.println("2. Chi tiết khóa học");
+        System.out.println("3. Tìm kiếm khóa học");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -24,19 +24,17 @@ public class SubjectTeacherDetail {
     }
 
     private static void all(Scanner in) {
-        if (SubjectTeacher.getTotal() <= 0) {
-            System.out.println("\nChưa có giảng viên bộ môn nào... @@");
+        if (Course.getTotal() <= 0) {
+            System.out.println("\nChưa có khóa học... @@");
             System.out.print("\nBấm 'Enter' để tiếp tục...");
             in.nextLine();
             return;
         }
 
-        System.out.printf("\n%4s  %4s  %-30s\n", "ID", "Môn học", "Giảng viên");
-
-        for (int i = 0; i < SubjectTeacher.getTotal(); i++) {
-            Main.subjectTeachers[i].print();
+        System.out.printf("\n%4s  %-50s\n  %s", "ID", "Tên khóa học", "Số môn");
+        for (int i = 0; i < Course.getTotal(); i++) {
+            Main.courses[i].print();
         }
-
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();
     }
@@ -73,11 +71,11 @@ public class SubjectTeacherDetail {
                     break;
 
                 case 2:
-                    System.out.println("\nChức năng lọc danh sách theo môn đang xây dựng\n");
+                    System.out.println("\nChức năng xem thông tin chi tiết khóa học đang xây dựng\n");
                     break;
 
                 case 3:
-                    System.out.println("\nChức năng lọc danh sách theo giảng viên đang xây dựng\n");
+                    System.out.println("\nChức năng tìm kiếm khóa học đang xây dựng\n");
                     break;
 
                 default:

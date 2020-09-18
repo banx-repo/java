@@ -17,8 +17,8 @@ public class New {
         System.out.println("3. Thêm giảng viên");
         System.out.println("4. Thêm phòng học");
         System.out.println("5. Thêm khóa học");
-        System.out.println("6. ---");
-        System.out.println("7. ---");
+        System.out.println("6. Thêm lớp học");
+
         System.out.println("\nNhập 'b' để trở về menu chính!\n");
 
         if (!validate) {
@@ -48,8 +48,8 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.printf("Họ tên học viên (6 - 30 ký tự không bao gồm số và ký tự đặc biệt): ");
-            s = in.nextLine().trim();
+            System.out.printf("Họ tên học viên (tối đa 30 ký tự không bao gồm số và ký tự đặc biệt): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
 
             if (s.equalsIgnoreCase("c")) {
                 System.out.println("\nĐã hủy");
@@ -57,7 +57,7 @@ public class New {
             }
 
             if (Pattern.matches(
-                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{6,30}",
+                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{1,30}",
                     s)) {
                 fullName = s;
                 validate = true;
@@ -124,8 +124,8 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.printf("Tên môn học (3 - 30 ký tự và số, không bao gồm ký tự đặc biệt): ");
-            s = in.nextLine().trim();
+            System.out.printf("Tên môn học (tối đa 30 ký tự và số, không bao gồm ký tự đặc biệt): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
 
             if (s.equalsIgnoreCase("c")) {
                 System.out.println("\nĐã hủy");
@@ -133,7 +133,7 @@ public class New {
             }
 
             if (Pattern.matches(
-                    "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{3,30}",
+                    "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{1,30}",
                     s)) {
                 break;
             }
@@ -172,8 +172,8 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.printf("Tên giảng viên (6 - 30 ký tự không bao gồm số và ký tự đặc biệt): ");
-            s = in.nextLine().trim();
+            System.out.printf("Tên giảng viên (tối đa 30 ký tự không bao gồm số và ký tự đặc biệt): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
 
             if (s.equalsIgnoreCase("c")) {
                 System.out.println("\nĐã hủy");
@@ -181,7 +181,7 @@ public class New {
             }
 
             if (Pattern.matches(
-                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{6,30}",
+                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{1,30}",
                     s)) {
                 fullName = s;
                 break;
@@ -206,43 +206,47 @@ public class New {
                 return;
             }
 
-            if (Pattern.matches("[0-9 ]{1,}", s)) {
-                try {
-                    String[] arr = s.split(" ");
-                    int[] listSubjectsId = new int[arr.length];
-                    listSubjects = new Subject[arr.length];
-
-                    loop: for (int i = 0, j = 0; i < arr.length; i++) {
-                        int id = Integer.parseInt(arr[i]);
-
-                        if (id <= 0 || id > Subject.getTotal()) {
-                            System.out.printf("Mã môn học '%d' không tồn tại!", id);
-                            throw new Exception();
-                        }
-
-                        for (int el : listSubjectsId) {
-                            if (el == 0) {
-                                break;
-                            }
-
-                            if (el == id) {
-                                continue loop;
-                            }
-                        }
-
-                        listSubjectsId[j] = id;
-                        listSubjects[j] = Main.subjects[id - 1];
-                        j++;
-                    }
-
-                    break;
-                } catch (Exception e) {
-                    System.out.println(e);
-                    validate = false;
-                }
+            if (!Pattern.matches("[0-9 ]{1,}", s)) {
+                validate = false;
+                continue;
             }
 
-            validate = false;
+            try {
+                String[] arr = s.split(" ");
+                int[] listSubjectsId = new int[arr.length];
+                listSubjects = new Subject[arr.length];
+
+                loop: for (int i = 0, j = 0; i < arr.length; i++) {
+                    int id = Integer.parseInt(arr[i]);
+
+                    if (id <= 0 || id > Subject.getTotal()) {
+                        System.out.printf("Mã môn học '%d' không tồn tại!", id);
+                        throw new Exception();
+                    }
+
+                    for (int el : listSubjectsId) {
+                        if (el == 0) {
+                            break;
+                        }
+
+                        if (el == id) {
+                            continue loop;
+                        }
+                    }
+
+                    listSubjectsId[j] = id;
+                    j++;
+                }
+
+                for (int i = 0; i < listSubjectsId.length; i++) {
+                    listSubjects[i] = Main.subjects[listSubjectsId[i] - 1];
+                }
+
+                break;
+            } catch (Exception e) {
+                System.out.println(e);
+                validate = false;
+            }
         }
 
         int index = Teacher.getTotal();
@@ -269,7 +273,7 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.print("Tên phòng học (3 - 10 ký tự không dấu và số, không bao gồm ký tự đặc biệt): ");
+            System.out.print("Tên phòng học (tối đa 10 ký tự không dấu và số, không bao gồm ký tự đặc biệt): ");
 
             s = in.nextLine().trim().replaceAll("\\s+", " ");
 
@@ -278,7 +282,7 @@ public class New {
                 return;
             }
 
-            if (Pattern.matches("[a-zA-Z0-9 ]{3,10}", s)) {
+            if (Pattern.matches("[a-zA-Z0-9 ]{1,10}", s)) {
                 name = s;
                 validate = true;
                 break;
@@ -295,7 +299,7 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.print("Địa chỉ (10 - 100 ký tự): ");
+            System.out.print("Địa chỉ (tối đa 100 ký tự): ");
 
             s = in.nextLine().trim().replaceAll("\\s+", " ");
 
@@ -304,7 +308,7 @@ public class New {
                 return;
             }
 
-            if (Pattern.matches(".{10,50}", s)) {
+            if (Pattern.matches(".{1,50}", s)) {
                 address = s;
                 validate = true;
                 break;
@@ -403,14 +407,13 @@ public class New {
     // }
 
     static void newCourse(Scanner in) {
-        // if (Student.getTotal() <= 0 || SubjectTeacher.getTotal() <= 0) {
-        // System.out.println(
-        // "\nChưa có dữ liệu học viên / giảng viên bộ môn.\n\nVui lòng thêm dữ liệu cơ
-        // bản trước khi mở lớp nhé!\n");
-        // System.out.print("Bấm 'Enter' để tiếp tục...");
-        // in.nextLine();
-        // return;
-        // }
+        if (Student.getTotal() <= 0 || SubjectTeacher.getTotal() <= 0) {
+            System.out.println(
+                    "\nChưa có dữ liệu học viên / giảng viên bộ môn.\n\nVui lòng thêm dữ liệu cơ bản trước khi mở lớp nhé!\n");
+            System.out.print("Bấm 'Enter' để tiếp tục...");
+            in.nextLine();
+            return;
+        }
 
         String s = "";
         String name = "";
@@ -424,11 +427,16 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.print("Tên khóa học (10 - 50 ký tự không bao gồm ký tự đặc biệt): ");
+            System.out.print("Tên khóa học (tối đa 50 ký tự không bao gồm ký tự đặc biệt): ");
             s = in.nextLine().trim().replaceAll("\\s+", " ");
 
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy\n");
+                return;
+            }
+
             if (Pattern.matches(
-                    "[a-zA-Z0-9 -àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{10,50}",
+                    "[a-zA-Z0-9 -àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{1,50}",
                     s)) {
                 name = s;
                 validate = true;
@@ -438,10 +446,136 @@ public class New {
             validate = false;
         }
 
+        SubjectTeacher[] listSubjectTeachers;
+        int rangeId = SubjectTeacher.getTotal();
+
+        while (true) {
+            System.out.println("\nThêm khóa học!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.print("Mã giáo viên bộ môn (phân tách bởi dấu ' '): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy\n");
+                return;
+            }
+
+            if (!Pattern.matches("[0-9 ]{1,}", s)) {
+                validate = false;
+                continue;
+            }
+
+            try {
+                String[] strArr = s.split(" ");
+                int[] listSubjectTeachersId = new int[strArr.length];
+
+                loop: for (int i = 0, j = 0; i < strArr.length; i++) {
+                    int id = Integer.parseInt(strArr[i]);
+
+                    if (id <= 0 || id > rangeId) {
+                        throw new Exception();
+                    }
+
+                    for (int el : listSubjectTeachersId) {
+                        if (el == 0) {
+                            break;
+                        }
+
+                        if (el == id) {
+                            continue loop;
+                        }
+                    }
+
+                    listSubjectTeachersId[j] = id;
+                    j++;
+                }
+
+                listSubjectTeachers = new SubjectTeacher[listSubjectTeachersId.length];
+
+                for (int i = 0; i < listSubjectTeachersId.length; i++) {
+                    listSubjectTeachers[i] = Main.subjectTeachers[listSubjectTeachersId[i] - 1];
+                }
+
+                break;
+
+            } catch (Exception e) {
+                validate = false;
+                continue;
+            }
+        }
+
+        Student[] listStudents;
+        int rangeStudent = Student.getTotal();
+
+        while (true) {
+            System.out.println("\nThêm khóa học!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.print("Mã học viên (phân tách bởi dấu ' '): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy\n");
+                return;
+            }
+
+            if (!Pattern.matches("[0-9 ]{1,}", s)) {
+                validate = false;
+                continue;
+            }
+
+            try {
+                String[] strArr = s.split(" ");
+                int[] listStudentsId = new int[strArr.length];
+
+                loop: for (int i = 0, j = 0; i < strArr.length; i++) {
+                    int id = Integer.parseInt(strArr[i]);
+
+                    if (id <= 0 || id > rangeStudent) {
+                        throw new Exception();
+                    }
+
+                    for (int el : listStudentsId) {
+                        if (el == 0) {
+                            break;
+                        }
+
+                        if (el == id) {
+                            continue loop;
+                        }
+                    }
+
+                    listStudentsId[j] = id;
+                    j++;
+                }
+
+                listStudents = new Student[listStudentsId.length];
+
+                for (int i = 0; i < listStudentsId.length; i++) {
+                    listStudents[i] = Main.students[listStudentsId[i]];
+                }
+
+                break;
+
+            } catch (Exception e) {
+                validate = false;
+                continue;
+            }
+        }
+
         int index = Course.getTotal();
         int id = Course.getNewId();
 
-        Main.courses[index] = new Course(id, name);
+        Main.courses[index] = new Course(id, name, listSubjectTeachers, listStudents);
         System.out.println("\nThêm khóa học mới thành công!\n");
         System.out.print("Bấm 'Enter' để tiếp tục...");
         in.nextLine();
@@ -500,11 +634,7 @@ public class New {
                     break;
 
                 case 6:
-                    System.out.println("---");
-                    break;
-
-                case 7:
-                    System.out.println("---");
+                    System.out.println("\nChức năng thêm lớp đang xây dựng\n");
                     break;
 
                 default:

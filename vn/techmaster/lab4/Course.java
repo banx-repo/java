@@ -22,6 +22,10 @@ public class Course {
         this.listStudents = listStudents;
     }
 
+    void print() {
+        System.out.printf("%4s  %-50s  %s", this.id, this.name, this.listSubjectTeachers.length);
+    }
+
     static int getNewId() {
         return count++;
     }

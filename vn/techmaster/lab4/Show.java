@@ -16,8 +16,8 @@ public class Show {
         System.out.println("3. Thông tin giảng viên");
         System.out.println("4. Thông tin phòng học");
         System.out.println("5. Thông tin giảng viên bộ môn");
-        System.out.println("6. ---");
-        System.out.println("7. ---");
+        System.out.println("6. Thông tin khóa học");
+        System.out.println("7. Thông tin lớp học");
         System.out.println("\nNhập 'b' để trở về menu chính!\n");
 
         if (!validate) {
@@ -75,11 +75,11 @@ public class Show {
                     break;
 
                 case 6:
-                    System.out.println("---");
+                    CourseDetail.show(in);
                     break;
 
                 case 7:
-                    System.out.println("---");
+                    System.out.println("\nChức năng xem thông tin lớp học đang xây dựng\n");
                     break;
 
                 default:

@@ -12,8 +12,7 @@ public class TeacherDetail {
     private static void print(boolean validate, String s) {
         System.out.println("\nThông tin giảng viên!!!\n");
         System.out.println("1. Toàn bộ giảng viên");
-        System.out.println("2. ---");
-        System.out.println("3. ---");
+        System.out.println("2. Tìm kiếm giảng viên");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -71,11 +70,7 @@ public class TeacherDetail {
                     break;
 
                 case 2:
-                    System.out.println("---");
-                    break;
-
-                case 3:
-                    System.out.println("---");
+                    System.out.println("\nChức năng tìm kiếm giảng viên đang xây dựng\n");
                     break;
 
                 default:
