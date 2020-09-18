@@ -2,7 +2,7 @@ package vn.techmaster.lab4;
 
 import java.util.Scanner;
 
-public class Show {
+public class SubjectTeacherDetail {
     /**
      * Hiển thị nội dung hướng dẫn sử dụng chức năng
      * 
@@ -10,15 +10,11 @@ public class Show {
      * @param s
      */
     private static void print(boolean validate, String s) {
-        System.out.println("\nXem thông tin!!!\n");
-        System.out.println("1. Thông tin học viên");
-        System.out.println("2. Thông tin môn học");
-        System.out.println("3. Thông tin giảng viên");
-        System.out.println("4. Thông tin phòng học");
-        System.out.println("5. Thông tin giảng viên bộ môn");
-        System.out.println("6. ---");
-        System.out.println("7. ---");
-        System.out.println("\nNhập 'b' để trở về menu chính!\n");
+        System.out.println("\nThông tin giảng viên bộ môn!!!\n");
+        System.out.println("1. Toàn bộ các giảng viên bộ môn");
+        System.out.println("2. ---");
+        System.out.println("3. ---");
+        System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
             System.out.println("'" + s + "' không hợp lệ!\n");
@@ -27,7 +23,25 @@ public class Show {
         System.out.print("Chọn thao tác: ");
     }
 
-    public static void choose(Scanner in) {
+    private static void all(Scanner in) {
+        if (SubjectTeacher.getTotal() <= 0) {
+            System.out.println("\nChưa có giảng viên bộ môn nào... @@");
+            System.out.print("\nBấm 'Enter' để tiếp tục...");
+            in.nextLine();
+            return;
+        }
+
+        System.out.printf("\n%4s  %4s  %-30s\n", "ID", "Môn học", "Giảng viên");
+
+        for (int i = 0; i < SubjectTeacher.getTotal(); i++) {
+            Main.subjectTeachers[i].print();
+        }
+
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
+    static void show(Scanner in) {
         int function = 0;
         String s = "";
 
@@ -55,30 +69,14 @@ public class Show {
 
             switch (function) {
                 case 1:
-                    StudentDetail.show(in);
+                    all(in);
                     break;
 
                 case 2:
-                    SubjectDetail.show(in);
-                    break;
-
-                case 3:
-                    TeacherDetail.show(in);
-                    break;
-
-                case 4:
-                    RoomDetails.show(in);
-                    break;
-
-                case 5:
-                    SubjectTeacherDetail.show(in);
-                    break;
-
-                case 6:
                     System.out.println("---");
                     break;
 
-                case 7:
+                case 3:
                     System.out.println("---");
                     break;
 

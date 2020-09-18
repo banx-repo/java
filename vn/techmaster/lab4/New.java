@@ -16,7 +16,7 @@ public class New {
         System.out.println("2. Thêm môn học");
         System.out.println("3. Thêm giảng viên");
         System.out.println("4. Thêm phòng học");
-        System.out.println("5. ---");
+        System.out.println("5. Thêm khóa học");
         System.out.println("6. ---");
         System.out.println("7. ---");
         System.out.println("\nNhập 'b' để trở về menu chính!\n");
@@ -124,7 +124,7 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.printf("Tên môn học (3 - 50 ký tự và số, không bao gồm ký tự đặc biệt): ");
+            System.out.printf("Tên môn học (3 - 30 ký tự và số, không bao gồm ký tự đặc biệt): ");
             s = in.nextLine().trim();
 
             if (s.equalsIgnoreCase("c")) {
@@ -133,7 +133,7 @@ public class New {
             }
 
             if (Pattern.matches(
-                    "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{3,50}",
+                    "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{3,30}",
                     s)) {
                 break;
             }
@@ -151,6 +151,13 @@ public class New {
     }
 
     private static void newTeacher(Scanner in) {
+        if (Subject.getTotal() <= 0) {
+            System.out.println("\nChưa có dữ liệu môn học.\n\nVui lòng nhập dữ liệu môn học trước!\n");
+            System.out.print("Bấm 'Enter' để tiếp tục...");
+            in.nextLine();
+            return;
+        }
+
         String s = "";
         String fullName = "";
         Subject[] listSubjects;
@@ -242,8 +249,8 @@ public class New {
         int id = Teacher.getNewId();
 
         Main.teachers[index] = new Teacher(id, fullName, listSubjects);
-        System.out.println("\nĐã thêm giảng viên thành công!");
-        System.out.print("\nBấm 'Enter' để tiếp tục....");
+        System.out.println("\nĐã thêm giảng viên thành công!\n");
+        System.out.print("Bấm 'Enter' để tiếp tục....");
         in.nextLine();
     }
 
@@ -262,7 +269,7 @@ public class New {
                 System.out.println("'" + s + "' không hợp lệ!\n");
             }
 
-            System.out.print("Tên lớp học (3 - 10 ký tự không dấu và số, không bao gồm ký tự đặc biệt): ");
+            System.out.print("Tên phòng học (3 - 10 ký tự không dấu và số, không bao gồm ký tự đặc biệt): ");
 
             s = in.nextLine().trim().replaceAll("\\s+", " ");
 
@@ -310,8 +317,133 @@ public class New {
         int id = Room.getNewId();
 
         Main.rooms[index] = new Room(id, name, address);
-        System.out.println("\nĐã thêm phòng học thành công!");
-        System.out.print("\nBấm 'Enter' để tiếp tục....");
+        System.out.println("\nĐã thêm phòng học thành công!\n");
+        System.out.print("Bấm 'Enter' để tiếp tục....");
+        in.nextLine();
+    }
+
+    // static void newSubjectTeacher(Scanner in) {
+    // if (Teacher.getTotal() <= 0 && Subject.getTotal() <= 0) {
+    // System.out.println(
+    // "\nChưa có dữ liệu giảng viên / môn học.\n\nVui lòng nhập dữ liệu cho giảng
+    // viên / môn học trước.\n");
+    // System.out.print("Bấm 'Enter' để tiếp tục...");
+    // in.nextLine();
+    // return;
+    // }
+
+    // String s = "";
+    // Subject subject;
+    // Teacher teacher;
+    // boolean validate = true;
+
+    // while (true) {
+    // System.out.println("\nThêm giảng viên bộ môn!!!\n");
+    // System.out.println("Nhập 'c' để hủy\n");
+
+    // if (!validate) {
+    // System.out.println("'" + s + "' không hợp lệ!\n");
+    // }
+
+    // System.out.print("Mã môn học: ");
+    // s = in.nextLine();
+
+    // if (s.equalsIgnoreCase("c")) {
+    // System.out.println("\nĐã hủyhủy\n");
+    // return;
+    // }
+
+    // try {
+    // subject = Main.subjects[Integer.parseInt(s) - 1];
+    // validate = true;
+    // break;
+    // } catch (Exception e) {
+    // validate = false;
+    // }
+    // }
+
+    // loop: while (true) {
+    // System.out.println("\nThêm giảng viên bộ môn!!!\n");
+    // System.out.println("Nhập 'c' để hủy\n");
+
+    // if (!validate) {
+    // System.out.println("'" + s + "' không hợp lệ!\n");
+    // }
+
+    // System.out.print("Mã giảng viên: ");
+    // s = in.nextLine();
+
+    // if (s.equalsIgnoreCase("c")) {
+    // System.out.println("\nĐã hủyhủy\n");
+    // return;
+    // }
+
+    // try {
+    // teacher = Main.teachers[Integer.parseInt(s) - 1];
+
+    // for (Subject sj : teacher.getListSubjects()) {
+    // if (sj.getId() == subject.getId()) {
+    // break loop;
+    // }
+    // }
+
+    // throw new Exception();
+    // } catch (Exception e) {
+    // validate = false;
+    // }
+    // }
+
+    // int index = SubjectTeacher.getTotal();
+    // int id = SubjectTeacher.getNewId();
+
+    // Main.subjectTeachers[index] = new SubjectTeacher(id, subject, teacher);
+    // System.out.println("\nĐã thêm giảng viên bộ môn thành công\n");
+    // System.out.print("Bấm 'Enter' để tiếp tục...");
+    // in.nextLine();
+    // }
+
+    static void newCourse(Scanner in) {
+        // if (Student.getTotal() <= 0 || SubjectTeacher.getTotal() <= 0) {
+        // System.out.println(
+        // "\nChưa có dữ liệu học viên / giảng viên bộ môn.\n\nVui lòng thêm dữ liệu cơ
+        // bản trước khi mở lớp nhé!\n");
+        // System.out.print("Bấm 'Enter' để tiếp tục...");
+        // in.nextLine();
+        // return;
+        // }
+
+        String s = "";
+        String name = "";
+        boolean validate = true;
+
+        while (true) {
+            System.out.println("\nThêm khóa học!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.print("Tên khóa học (10 - 50 ký tự không bao gồm ký tự đặc biệt): ");
+            s = in.nextLine().trim().replaceAll("\\s+", " ");
+
+            if (Pattern.matches(
+                    "[a-zA-Z0-9 -àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{10,50}",
+                    s)) {
+                name = s;
+                validate = true;
+                break;
+            }
+
+            validate = false;
+        }
+
+        int index = Course.getTotal();
+        int id = Course.getNewId();
+
+        Main.courses[index] = new Course(id, name);
+        System.out.println("\nThêm khóa học mới thành công!\n");
+        System.out.print("Bấm 'Enter' để tiếp tục...");
         in.nextLine();
     }
 
@@ -364,7 +496,7 @@ public class New {
                     break;
 
                 case 5:
-                    System.out.println("---");
+                    newCourse(in);
                     break;
 
                 case 6:

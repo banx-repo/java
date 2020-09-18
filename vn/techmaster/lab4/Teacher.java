@@ -10,7 +10,10 @@ public class Teacher {
         this.id = id;
         this.fullName = fullName;
         this.listSubjects = listSubjects;
-        print();
+
+        for (Subject sj : listSubjects) {
+            Main.subjectTeachers[SubjectTeacher.getTotal()] = new SubjectTeacher(SubjectTeacher.getNewId(), sj, this);
+        }
     }
 
     void print() {
