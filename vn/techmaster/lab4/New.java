@@ -1,5 +1,6 @@
 package vn.techmaster.lab4;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -56,7 +57,7 @@ public class New {
                 return;
             }
 
-            if (s.length() > 0 && Pattern.matches(
+            if (Pattern.matches(
                     "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{6,30}",
                     s)) {
                 fullName = s;
@@ -132,7 +133,7 @@ public class New {
                 return;
             }
 
-            if (s.length() > 0 && Pattern.matches(
+            if (Pattern.matches(
                     "[a-zA-z0-9 àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{3,50}",
                     s)) {
                 break;
@@ -148,6 +149,83 @@ public class New {
         System.out.println("\nĐã thêm môn học thành công!");
         System.out.print("\nBấm 'Enter' để tiếp tục....");
         in.nextLine();
+    }
+
+    private static void newTeacher(Scanner in) {
+        String s = "";
+        String fullName = "";
+        Subject[] listSubjects;
+
+        boolean validate = true;
+
+        while (true) {
+            System.out.println("\nThêm giảng viên mới!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.printf("Tên giảng viên (6 - 30 ký tự không bao gồm số và ký tự đặc biệt): ");
+            s = in.nextLine().trim();
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy");
+                return;
+            }
+
+            if (Pattern.matches(
+                    "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{6,30}",
+                    s)) {
+                fullName = s;
+                break;
+            }
+
+            validate = false;
+        }
+
+        while (true) {
+            System.out.println("\nThêm giảng viên mới!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("'" + s + "' không hợp lệ!\n");
+            }
+
+            System.out.printf("Danh sách môn dạy (Id môn học, phân tách bởi dấu ' '): ");
+            s = in.nextLine().trim().replaceAll("[ ]{2}]", " ");
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy");
+                return;
+            }
+
+            if (Pattern.matches("[0-9 ]{1}", s)) {
+                try {
+                    String[] arr = s.split(" ");
+                    listSubjects = new Subject[arr.length];
+
+                    for (int i = 0, j = 0; i < arr.length; i++, j++) {
+                        int id = Integer.parseInt(arr[i]);
+
+                        if (id <= 0 || id > Subject.getTotal()) {
+                            System.out.printf("Mã môn học '%d' không tồn tại!", id);
+                            throw new Exception();
+                        }
+                        
+                    }
+
+                    break;
+                } catch (Exception e) {
+                    validate = false;
+                }
+            }
+
+            validate = false;
+        }
+
+        int id = Teacher.getNewId();
+
     }
 
     /**
