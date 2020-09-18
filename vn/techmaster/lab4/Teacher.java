@@ -6,14 +6,19 @@ public class Teacher {
     private String fullName;
     private Subject[] listSubjects;
 
-    Teacher(int id, String fullName) {
+    Teacher(int id, String fullName, Subject[] listSubjects) {
         this.id = id;
         this.fullName = fullName;
+        this.listSubjects = listSubjects;
+        print();
     }
 
-    Teacher(int id, String fullName, Subject[] listSubjects) {
-        this(id, fullName);
-        this.listSubjects = listSubjects;
+    void print() {
+        StringBuilder sb = new StringBuilder();
+        for (Subject sj : listSubjects) {
+            sb.append(sj.getName() + ", ");
+        }
+        System.out.printf("%4s  %-30s  %s\n", this.id, this.fullName, sb);
     }
 
     static int getNewId() {

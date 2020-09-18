@@ -12,6 +12,10 @@ public class Room {
         this.address = address;
     }
 
+    void print() {
+        System.out.printf("%4s  %-10s  %s\n", this.id, this.name, this.address);
+    }
+
     static int getNewId() {
         return count++;
     }

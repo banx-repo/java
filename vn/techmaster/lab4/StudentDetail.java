@@ -14,10 +14,6 @@ public class StudentDetail {
         System.out.println("1. Toàn bộ học viên");
         System.out.println("2. ---");
         System.out.println("3. ---");
-        System.out.println("4. ---");
-        System.out.println("5. ---");
-        System.out.println("6. ---");
-        System.out.println("7. ---");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -79,22 +75,6 @@ public class StudentDetail {
                     break;
 
                 case 3:
-                    System.out.println("---");
-                    break;
-
-                case 4:
-                    System.out.println("---");
-                    break;
-
-                case 5:
-                    System.out.println("---");
-                    break;
-
-                case 6:
-                    System.out.println("---");
-                    break;
-
-                case 7:
                     System.out.println("---");
                     break;
 

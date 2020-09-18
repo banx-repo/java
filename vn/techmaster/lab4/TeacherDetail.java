@@ -2,7 +2,7 @@ package vn.techmaster.lab4;
 
 import java.util.Scanner;
 
-public class SubjectDetail {
+public class TeacherDetail {
     /**
      * Hiển thị nội dung hướng dẫn sử dụng chức năng
      * 
@@ -10,8 +10,8 @@ public class SubjectDetail {
      * @param s
      */
     private static void print(boolean validate, String s) {
-        System.out.println("\nThông tin môn học!!!\n");
-        System.out.println("1. Toàn bộ môn học");
+        System.out.println("\nThông tin giảng viên!!!\n");
+        System.out.println("1. Toàn bộ giảng viên");
         System.out.println("2. ---");
         System.out.println("3. ---");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
@@ -24,16 +24,16 @@ public class SubjectDetail {
     }
 
     private static void all(Scanner in) {
-        if (Subject.getTotal() <= 0) {
-            System.out.println("\nChưa có môn học... @@");
+        if (Teacher.getTotal() <= 0) {
+            System.out.println("\nChưa có giảng viên... @@");
             System.out.print("\nBấm 'Enter' để tiếp tục...");
             in.nextLine();
             return;
         }
 
-        System.out.printf("\n%4s  %-50s\n", "ID", "Tên môn học");
-        for (int i = 0; i < Subject.getTotal(); i++) {
-            Main.subjects[i].print();
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Họ và tên", "Các môn dạy");
+        for (int i = 0; i < Teacher.getTotal(); i++) {
+            Main.teachers[i].print();
         }
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();

@@ -13,8 +13,8 @@ public class Show {
         System.out.println("\nXem thông tin!!!\n");
         System.out.println("1. Thông tin học viên");
         System.out.println("2. Thông tin môn học");
-        System.out.println("3. ---");
-        System.out.println("4. ---");
+        System.out.println("3. Thông tin giảng viên");
+        System.out.println("4. Thông tin phòng học");
         System.out.println("5. ---");
         System.out.println("6. ---");
         System.out.println("7. ---");
@@ -63,11 +63,11 @@ public class Show {
                     break;
 
                 case 3:
-                    System.out.println("---");
+                    TeacherDetail.show(in);
                     break;
 
                 case 4:
-                    System.out.println("---");
+                    RoomDetails.show(in);
                     break;
 
                 case 5:
