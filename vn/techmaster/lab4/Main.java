@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     static Student[] students = new Student[1000];
-    static Teacher[] teachers = new Teacher[50];
+    static Teacher[] teachers = new Teacher[30];
     static Subject[] subjects = new Subject[50];
     static Room[] rooms = new Room[20];
     static SubjectTeacher[] subjectTeachers = new SubjectTeacher[500];

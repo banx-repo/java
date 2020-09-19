@@ -161,6 +161,7 @@ public class New {
         String s = "";
         String fullName = "";
         Subject[] listSubjects;
+        int count = 0;
 
         boolean validate = true;
 
@@ -214,7 +215,6 @@ public class New {
             try {
                 String[] arr = s.split(" ");
                 int[] listSubjectsId = new int[arr.length];
-                listSubjects = new Subject[arr.length];
 
                 loop: for (int i = 0, j = 0; i < arr.length; i++) {
                     int id = Integer.parseInt(arr[i]);
@@ -235,10 +235,12 @@ public class New {
                     }
 
                     listSubjectsId[j] = id;
+                    count++;
                     j++;
                 }
 
-                for (int i = 0; i < listSubjectsId.length; i++) {
+                listSubjects = new Subject[count];
+                for (int i = 0; i < count; i++) {
                     listSubjects[i] = Main.subjects[listSubjectsId[i] - 1];
                 }
 
@@ -448,6 +450,7 @@ public class New {
 
         SubjectTeacher[] listSubjectTeachers;
         int rangeId = SubjectTeacher.getTotal();
+        int count = 0;
 
         while (true) {
             System.out.println("\nThêm khóa học!!!\n");
@@ -492,12 +495,13 @@ public class New {
                     }
 
                     listSubjectTeachersId[j] = id;
+                    count++;
                     j++;
                 }
 
-                listSubjectTeachers = new SubjectTeacher[listSubjectTeachersId.length];
+                listSubjectTeachers = new SubjectTeacher[count];
 
-                for (int i = 0; i < listSubjectTeachersId.length; i++) {
+                for (int i = 0; i < count; i++) {
                     listSubjectTeachers[i] = Main.subjectTeachers[listSubjectTeachersId[i] - 1];
                 }
 
@@ -511,6 +515,7 @@ public class New {
 
         Student[] listStudents;
         int rangeStudent = Student.getTotal();
+        count = 0;
 
         while (true) {
             System.out.println("\nThêm khóa học!!!\n");
@@ -555,13 +560,14 @@ public class New {
                     }
 
                     listStudentsId[j] = id;
+                    count++;
                     j++;
                 }
 
-                listStudents = new Student[listStudentsId.length];
+                listStudents = new Student[count];
 
-                for (int i = 0; i < listStudentsId.length; i++) {
-                    listStudents[i] = Main.students[listStudentsId[i]];
+                for (int i = 0; i < count; i++) {
+                    listStudents[i] = Main.students[listStudentsId[i] - 1];
                 }
 
                 break;

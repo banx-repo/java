@@ -31,10 +31,11 @@ public class CourseDetail {
             return;
         }
 
-        System.out.printf("\n%4s  %-50s\n  %s", "ID", "Tên khóa học", "Số môn");
+        System.out.printf("\n%4s  %-50s  %s\n", "ID", "Tên khóa học", "Số môn");
         for (int i = 0; i < Course.getTotal(); i++) {
             Main.courses[i].print();
         }
+        System.out.println();
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();
     }
