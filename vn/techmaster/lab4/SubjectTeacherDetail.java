@@ -31,7 +31,7 @@ public class SubjectTeacherDetail {
             return;
         }
 
-        System.out.printf("\n%4s  %4s  %-30s\n", "ID", "Môn học", "Giảng viên");
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Môn học", "Giảng viên");
 
         for (int i = 0; i < SubjectTeacher.getTotal(); i++) {
             Main.subjectTeachers[i].print();

@@ -17,7 +17,6 @@ public class Main {
         System.out.println("2. Thêm dữ liệu");
         System.out.println("3. Sửa dữ liệu");
         System.out.println("4. Xóa dữ liệu");
-        System.out.println();
         System.out.println("\nNhập 'q' để thoát chương trình!\n");
 
         if (!validate) {

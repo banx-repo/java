@@ -13,7 +13,7 @@ public class SubjectTeacher {
     }
 
     void print() {
-        System.out.printf("%4s  %-30s %s\n", this.id, this.subject.getName(), this.teacher.getFullName());
+        System.out.printf("%4s  %-30s  %s\n", this.id, this.subject.getName(), this.teacher.getFullName());
     }
 
     static int getNewId() {
