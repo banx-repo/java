@@ -1,5 +1,6 @@
 package vn.techmaster.lab4;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SubjectTeacherDetail {
@@ -12,8 +13,8 @@ public class SubjectTeacherDetail {
     private static void print(boolean validate, String s) {
         System.out.println("\nThông tin giảng viên bộ môn!!!\n");
         System.out.println("1. Toàn bộ các giảng viên bộ môn");
-        System.out.println("2. Lọc danh sách theo môn");
-        System.out.println("3. Lọc danh sách theo giảng viên");
+        System.out.println("2. Tìm kiếm giảng viên bộ môn theo giảng viên");
+        System.out.println("3. Tìm kiếm giảng viên bộ môn theo môn học");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -36,6 +37,70 @@ public class SubjectTeacherDetail {
         for (int i = 0; i < SubjectTeacher.getTotal(); i++) {
             Main.subjectTeachers[i].print();
         }
+
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
+    private static void searhByName(Scanner in) {
+        System.out.println("\nTìm kiếm giảng viên bộ môn theo tên!!!\n");
+        System.out.println("Nhập 'c' để hủy bỏ.\n");
+        System.out.print("Tên giảng viên: ");
+        Locale l = new Locale("vi-VN");
+        String s = in.nextLine().toLowerCase(l);
+        int count = 0;
+
+        if (s.equalsIgnoreCase("c")) {
+            System.out.println("\nĐã hủy\n");
+            return;
+        }
+
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Môn học", "Giảng viên");
+
+        for (SubjectTeacher st : Main.subjectTeachers) {
+            if (st == null) {
+                break;
+            }
+
+            if (st.getTeacher().getFullName().toLowerCase(l).contains(s)) {
+                st.print();
+                count++;
+            }
+        }
+
+        System.out.printf("\nTổng cộng: %d\n", count);
+
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
+    private static void searhBySubject(Scanner in) {
+        System.out.println("\nTìm kiếm giảng viên bộ môn theo môn học!!!\n");
+        System.out.println("Nhập 'c' để hủy bỏ.\n");
+        System.out.print("Tên môn học: ");
+        Locale l = new Locale("vi-VN");
+        String s = in.nextLine().toLowerCase(l);
+        int count = 0;
+
+        if (s.equalsIgnoreCase("c")) {
+            System.out.println("\nĐã hủy\n");
+            return;
+        }
+
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Môn học", "Giảng viên");
+
+        for (SubjectTeacher st : Main.subjectTeachers) {
+            if (st == null) {
+                break;
+            }
+
+            if (st.getSubject().getName().toLowerCase(l).contains(s)) {
+                st.print();
+                count++;
+            }
+        }
+
+        System.out.printf("\nTổng cộng: %d\n", count);
 
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();
@@ -73,11 +138,11 @@ public class SubjectTeacherDetail {
                     break;
 
                 case 2:
-                    System.out.println("\nChức năng lọc danh sách theo môn đang xây dựng\n");
+                    searhByName(in);
                     break;
 
                 case 3:
-                    System.out.println("\nChức năng lọc danh sách theo giảng viên đang xây dựng\n");
+                    searhBySubject(in);
                     break;
 
                 default:

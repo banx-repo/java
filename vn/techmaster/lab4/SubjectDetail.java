@@ -1,5 +1,6 @@
 package vn.techmaster.lab4;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SubjectDetail {
@@ -38,6 +39,38 @@ public class SubjectDetail {
         in.nextLine();
     }
 
+    private static void searh(Scanner in) {
+        System.out.println("\nTìm kiếm môn học theo tên!!!\n");
+        System.out.println("Nhập 'c' để hủy bỏ.\n");
+        System.out.print("Tên môn học: ");
+        Locale l = new Locale("vi-VN");
+        String s = in.nextLine().toLowerCase(l);
+        int count = 0;
+
+        if (s.equalsIgnoreCase("c")) {
+            System.out.println("\nĐã hủy\n");
+            return;
+        }
+
+        System.out.printf("\n%4s  %-50s\n", "ID", "Tên môn học");
+
+        for (Subject sj : Main.subjects) {
+            if (sj == null) {
+                break;
+            }
+
+            if (sj.getName().toLowerCase(l).contains(s)) {
+                sj.print();
+                count++;
+            }
+        }
+
+        System.out.printf("\nTổng cộng: %d\n", count);
+
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
     static void show(Scanner in) {
         int function = 0;
         String s = "";
@@ -70,7 +103,7 @@ public class SubjectDetail {
                     break;
 
                 case 2:
-                    System.out.println("\nChức năng tìm kiếm môn học đang xây dựng\n");
+                    searh(in);
                     break;
 
                 default:

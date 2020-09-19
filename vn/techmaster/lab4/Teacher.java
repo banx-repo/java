@@ -55,4 +55,18 @@ public class Teacher {
     void setListSubjects(Subject[] listSubjects) {
         this.listSubjects = listSubjects;
     }
+
+    String sjToString() {
+        StringBuilder s = new StringBuilder();
+
+        for (Subject sj : this.listSubjects) {
+            if (sj == null) {
+                break;
+            }
+
+            s.append(sj.getName());
+        }
+
+        return s.toString();
+    }
 }

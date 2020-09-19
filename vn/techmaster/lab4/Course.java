@@ -23,7 +23,23 @@ public class Course {
     }
 
     void print() {
-        System.out.printf("%4s  %-50s  %s", this.id, this.name, this.listSubjectTeachers.length);
+        System.out.printf("%4s  %-50s  %s\n", this.id, this.name, this.listSubjectTeachers.length);
+    }
+
+    void printDetail() {
+        System.out.printf("\nKhóa học %s\n\n", this.name);
+
+        System.out.println("Giảng viên bộ môn:\n");
+        System.out.printf("%4s  %-30s  %s\n", "ID", "Môn học", "Giảng viên");
+        for (SubjectTeacher st : listSubjectTeachers) {
+            st.print();
+        }
+
+        System.out.println("\nHọc viên đăng ký:\n");
+        System.out.printf("%4s  %4s  %s\n", "ID", "Tuổi", "Họ tên");
+        for (Student sd : listStudents) {
+            sd.print();
+        }
     }
 
     static int getNewId() {

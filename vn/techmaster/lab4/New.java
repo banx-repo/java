@@ -185,6 +185,7 @@ public class New {
                     "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]{1,30}",
                     s)) {
                 fullName = s;
+                validate = true;
                 break;
             }
 
@@ -508,6 +509,7 @@ public class New {
                 break;
 
             } catch (Exception e) {
+                System.err.println(e);
                 validate = false;
                 continue;
             }

@@ -1,6 +1,8 @@
 package vn.techmaster.lab4;
 
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class CourseDetail {
     /**
@@ -40,6 +42,65 @@ public class CourseDetail {
         in.nextLine();
     }
 
+    private static void details(Scanner in) {
+        boolean validate = true;
+
+        while (true) {
+            System.out.println("\nChi tiết khóa học!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            if (!validate) {
+                System.out.println("Mã khóa học không hợp lệ hoặc không tồn tại!\n");
+            }
+
+            System.out.print("Mã khóa học: ");
+            String s = in.nextLine();
+
+            if (s.equalsIgnoreCase("c")) {
+                System.out.println("\nĐã hủy\n");
+                return;
+            }
+
+            if (!Pattern.matches("[0-9]{1,}", s) || Integer.parseInt(s) <= 0
+                    || Integer.parseInt(s) > Course.getTotal()) {
+                validate = false;
+                continue;
+            }
+
+            Main.courses[Integer.parseInt(s) - 1].printDetail();
+            System.out.print("\nBấm 'Enter' để tiếp tục...");
+            in.nextLine();
+            break;
+        }
+    }
+
+    public static void search(Scanner in) {
+        Locale l = new Locale("vi-VN");
+
+        while (true) {
+            System.out.println("\nTìm kiếm khóa học!!!\n");
+            System.out.println("Nhập 'c' để hủy bỏ\n");
+
+            System.out.print("Tên khóa học: ");
+            String s = in.nextLine().trim().replaceAll("\\s+", " ");
+
+            System.out.printf("\n%4s  %-50s  %s\n", "ID", "Tên khóa học", "Số môn");
+            for (Course c : Main.courses) {
+                if (c == null) {
+                    break;
+                }
+
+                if (c.getName().toLowerCase(l).contains(s)) {
+                    c.print();
+                }
+            }
+
+            System.out.print("\nBấm 'Enter' để tiếp tục...");
+            in.nextLine();
+            break;
+        }
+    }
+
     static void show(Scanner in) {
         int function = 0;
         String s = "";
@@ -72,11 +133,11 @@ public class CourseDetail {
                     break;
 
                 case 2:
-                    System.out.println("\nChức năng xem thông tin chi tiết khóa học đang xây dựng\n");
+                    details(in);
                     break;
 
                 case 3:
-                    System.out.println("\nChức năng tìm kiếm khóa học đang xây dựng\n");
+                    search(in);
                     break;
 
                 default:

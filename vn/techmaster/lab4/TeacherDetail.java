@@ -1,5 +1,6 @@
 package vn.techmaster.lab4;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class TeacherDetail {
@@ -12,7 +13,8 @@ public class TeacherDetail {
     private static void print(boolean validate, String s) {
         System.out.println("\nThông tin giảng viên!!!\n");
         System.out.println("1. Toàn bộ giảng viên");
-        System.out.println("2. Tìm kiếm giảng viên");
+        System.out.println("2. Tìm kiếm giảng viên theo tên");
+        System.out.println("3. Tìm kiếm giảng viên theo bộ môn");
         System.out.println("\nNhập 'b' để trở về menu trước!\n");
 
         if (!validate) {
@@ -34,6 +36,70 @@ public class TeacherDetail {
         for (int i = 0; i < Teacher.getTotal(); i++) {
             Main.teachers[i].print();
         }
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
+    private static void searhByName(Scanner in) {
+        System.out.println("\nTìm kiếm giảng viên theo tên!!!\n");
+        System.out.println("Nhập 'c' để hủy bỏ.\n");
+        System.out.print("Tên giảng viên: ");
+        Locale l = new Locale("vi-VN");
+        String s = in.nextLine().toLowerCase(l);
+        int count = 0;
+
+        if (s.equalsIgnoreCase("c")) {
+            System.out.println("\nĐã hủy\n");
+            return;
+        }
+
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Họ tên", "Bộ môn");
+
+        for (Teacher t : Main.teachers) {
+            if (t == null) {
+                break;
+            }
+
+            if (t.getFullName().toLowerCase(l).contains(s)) {
+                t.print();
+                count++;
+            }
+        }
+
+        System.out.printf("\nTổng cộng: %d\n", count);
+
+        System.out.printf("\nBấm 'Enter' để tiếp tục...");
+        in.nextLine();
+    }
+
+    private static void searhBySubject(Scanner in) {
+        System.out.println("\nTìm kiếm giảng viên theo bộ môn!!!\n");
+        System.out.println("Nhập 'c' để hủy bỏ.\n");
+        System.out.print("Tên môn học: ");
+        Locale l = new Locale("vi-VN");
+        String s = in.nextLine().toLowerCase(l);
+        int count = 0;
+
+        if (s.equalsIgnoreCase("c")) {
+            System.out.println("\nĐã hủy\n");
+            return;
+        }
+
+        System.out.printf("\n%4s  %-30s  %s\n", "ID", "Họ tên", "Bộ môn");
+
+        for (Teacher t : Main.teachers) {
+            if (t == null) {
+                break;
+            }
+
+            if (t.sjToString().toLowerCase(l).contains(s)) {
+                t.print();
+                count++;
+            }
+        }
+
+        System.out.printf("\nTổng cộng: %d\n", count);
+
         System.out.printf("\nBấm 'Enter' để tiếp tục...");
         in.nextLine();
     }
@@ -70,7 +136,11 @@ public class TeacherDetail {
                     break;
 
                 case 2:
-                    System.out.println("\nChức năng tìm kiếm giảng viên đang xây dựng\n");
+                    searhByName(in);
+                    break;
+
+                case 3:
+                    searhBySubject(in);
                     break;
 
                 default:
