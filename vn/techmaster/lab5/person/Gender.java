@@ -1,4 +1,4 @@
-package vn.techmaster.lab5.persion;
+package vn.techmaster.lab5.person;
 
 public enum Gender {
     MALE(1), FERMALE(2), OTHER(3);
