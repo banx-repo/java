@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Student extends Person {
-    public static int count = 1;
+    private static int count = 1;
     private static String pf = "%-2s %-8s %-4s %-20s %-9s %-10s %-20s %s\n";
 
     private int id;
@@ -48,7 +48,7 @@ public class Student extends Person {
         try {
             float f = Float.parseFloat(score);
 
-            if (f > 0 || f < 10) {
+            if (f >= 0 && f <= 10) {
                 this.score = f;
                 return true;
             }
@@ -102,8 +102,11 @@ public class Student extends Person {
     }
 
     Student(Scanner in) {
+        System.out.println();
         System.out.println("Tạo hồ sơ học viên mới!");
         System.out.println("Nhập 'C' để hủy bỏ.");
+
+        System.out.println();
         System.out.println("ID: " + (getTotalId() + 1));
 
         if (!create(in)) {
@@ -115,30 +118,13 @@ public class Student extends Person {
                 .append(String.format("%03d", id)).toString();
     }
 
-    /**
-     * <pre>
-     * ID   Mã SV  Điểm  Họ tên  Giới tính  Ngày sinh  Email  Địa chỉ
-     * </pre>
-     * 
-     * <pre>
-     * %-2s %-8s   %-4s  %-20s   %-9s       %-10s      %-20s   %s
-     * </pre>
-     */
     @Override
     public void print() {
         System.out.printf(pf, getId(), getCode(), getScore(), getFullName(), getGender(), getBirthday(), getEmail(),
                 getAddress());
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        try {
-            Student s = new Student(in);
-            System.out.printf(pf, "ID", "Mã SV", "Điểm", "Họ tên", "Giới tính", "Ngày sinh", "Email", "Địa chỉ");
-            s.print();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void printHeader() {
+        System.out.printf(pf, "ID", "Mã SV", "Điểm", "Họ tên", "Giới tính", "Ngày sinh", "Email", "Địa chỉ");
     }
 }

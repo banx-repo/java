@@ -112,8 +112,11 @@ public class Teacher extends Person {
     }
 
     Teacher(Scanner in) {
+        System.out.println();
         System.out.println("Tạo hồ sơ giảng viên mới!");
         System.out.println("Nhập 'C' để hủy bỏ.");
+
+        System.out.println();
         System.out.println("ID: " + (getTotalId() + 1));
 
         if (!create(in)) {
@@ -125,27 +128,19 @@ public class Teacher extends Person {
 
     @Override
     public void print() {
-        System.out.printf(pf, "ID", "Họ tên", "Giới tính", "Ngày sinh", "Lớp dạy", "Lương/giờ", "Giờ dạy", "Địa chỉ");
         System.out.printf(pf, this.getId(), this.getFullName(), this.getGender(), this.getBirthday(),
                 this.getClassCode(), this.getSalary(), this.getHour(), this.getAddress());
     }
 
-    public double payrol() {
+    public static void printHeader() {
+        System.out.printf(pf, "ID", "Họ tên", "Giới tính", "Ngày sinh", "Lớp dạy", "Lương/giờ", "Giờ dạy", "Địa chỉ");
+    }
+
+    public double payroll() {
         if (classCode.ordinal() <= 4) {
             return salary * hour;
         }
 
         return salary * hour + 200000;
-    }
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        try {
-            Teacher t = new Teacher(in);
-            t.print();
-            System.out.println(t.payrol());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 }
