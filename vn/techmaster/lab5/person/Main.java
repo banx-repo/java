@@ -11,7 +11,7 @@ public class Main {
         String s;
 
         System.out.println();
-        System.out.println("Demo buổi 4!!!");
+        System.out.println("Demo quản lý sinh viên - giảng viên!!!");
         System.out.println("1. Quản lý sinh viên");
         System.out.println("2. Quản lý giảng viên");
 
