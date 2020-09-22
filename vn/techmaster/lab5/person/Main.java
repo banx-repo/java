@@ -1,10 +1,11 @@
 package vn.techmaster.lab5.person;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static Student[] students = new Student[10];
-    public static Teacher[] teachers = new Teacher[10];
+    public static ArrayList<Student> students = new ArrayList<Student>();
+    public static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Main {
         System.out.println("Nhập 'q' để thoát");
 
         main: while (true) {
-            System.out.print("Chọc chức năng: ");
+            System.out.print("Chọn chức năng: ");
             s = in.nextLine();
 
             switch (s) {
@@ -60,7 +61,7 @@ public class Main {
             switch (s) {
                 case "1":
                     try {
-                        students[Student.getTotalId()] = new Student(in);
+                        students.add(new Student(in));
                         System.out.println("Đã tạo thành công...");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -108,7 +109,7 @@ public class Main {
             switch (s) {
                 case "1":
                     try {
-                        teachers[Teacher.getTotalId()] = new Teacher(in);
+                        teachers.add(new Teacher(in));
                         System.out.println("Đã tạo thành công...");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
