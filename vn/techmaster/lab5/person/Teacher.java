@@ -84,8 +84,8 @@ public class Teacher extends Person {
     }
 
     @Override
-    protected boolean create(Scanner in) {
-        super.create(in);
+    protected boolean create() {
+        super.create();
 
         while (!cancelConstructor) {
             System.out.print("Mã lớp dạy (GHIKLM): ");
@@ -119,7 +119,7 @@ public class Teacher extends Person {
         System.out.println();
         System.out.println("ID: " + (getTotalId() + 1));
 
-        if (!create(in)) {
+        if (!create()) {
             throw new IllegalArgumentException("Đã hủy...");
         }
 

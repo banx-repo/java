@@ -15,6 +15,8 @@ public class Person {
     private LocalDate birthday;
     private String address;
 
+    protected Scanner in;
+
     private final String REG = "[a-zA-z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]";
 
     // auto increment
@@ -121,7 +123,7 @@ public class Person {
         return false;
     }
 
-    protected boolean create(Scanner in) {
+    protected boolean create() {
         while (!cancelConstructor) {
             System.out.print("Họ tên (tối đa 20 ký tự, không chứa số và ký tự đặc biệt): ");
             if (setFullName(in.nextLine().trim().replaceAll("\\s+", " "))) {
@@ -161,11 +163,12 @@ public class Person {
     }
 
     Person(Scanner in) {
+        this.in = in;
         System.out.println("Tạo hồ sơ cá nhân mới!");
         System.out.println("Nhập 'C' để hủy bỏ.");
         System.out.println("ID: " + (getTotalId() + 1));
 
-        if (!create(in)) {
+        if (!create()) {
             throw new IllegalArgumentException("Đã hủy...");
         }
 

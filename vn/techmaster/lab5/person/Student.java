@@ -77,8 +77,9 @@ public class Student extends Person {
     }
 
     @Override
-    protected boolean create(Scanner in) {
-        super.create(in);
+    protected boolean create() {
+        super.create();
+
 
         while (!cancelConstructor) {
             System.out.print("Điểm trung bình: ");
@@ -102,6 +103,7 @@ public class Student extends Person {
     }
 
     Student(Scanner in) {
+        this.in = in;
         System.out.println();
         System.out.println("Tạo hồ sơ học viên mới!");
         System.out.println("Nhập 'C' để hủy bỏ.");
@@ -109,7 +111,7 @@ public class Student extends Person {
         System.out.println();
         System.out.println("ID: " + (getTotalId() + 1));
 
-        if (!create(in)) {
+        if (!create()) {
             throw new IllegalArgumentException("Đã hủy...");
         }
 

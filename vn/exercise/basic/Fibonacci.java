@@ -1,7 +1,7 @@
 package vn.exercise.basic;
 
 import java.util.Scanner;
-import vn.banx.lib.ClearScreen;
+import vn.lib.ClearScreen;
 
 class Fibonacci {
     public static void main(String[] args) {

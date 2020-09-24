@@ -1,4 +1,4 @@
-package vn.banx.lib;
+package vn.lib;
 
 import java.io.IOException;
 
