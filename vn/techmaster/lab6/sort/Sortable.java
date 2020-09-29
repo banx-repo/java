@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 @FunctionalInterface
 public interface Sortable {
-    void sort(ArrayList<Employee> employees);
+    ArrayList<Employee> sort(ArrayList<Employee> employees);
 }

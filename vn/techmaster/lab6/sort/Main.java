@@ -2,81 +2,96 @@ package vn.techmaster.lab6.sort;
 
 import java.util.ArrayList;
 
+import vn.lib.ClearScreen;
+
 public class Main {
     public static void main(String[] args) {
+        ClearScreen.clear();
 
         Sortable bubble = (ArrayList<Employee> employees) -> {
+            ArrayList<Employee> clone = new ArrayList<Employee>(employees);
             Employee min;
-            for (int i = 0; i < employees.size() - 1; i++) {
-                min = employees.get(i);
-                for (int j = i + 1; j < employees.size(); j++) {
-                    if (min.id > employees.get(j).id) {
-                        employees.set(i, employees.get(j));
-                        employees.set(j, min);
-                        min = employees.get(i);
+
+            for (int i = 0; i < clone.size() - 1; i++) {
+                min = clone.get(i);
+
+                for (int j = i + 1; j < clone.size(); j++) {
+                    if (min.getId() < clone.get(j).getId()) {
+                        clone.set(i, clone.get(j));
+                        clone.set(j, min);
+                        min = clone.get(i);
                     }
                 }
             }
+
+            return clone;
         };
 
         Sortable selection = (ArrayList<Employee> employees) -> {
+            ArrayList<Employee> clone = new ArrayList<Employee>(employees);
             Employee min;
             int index;
-            for (int i = 0; i < employees.size() - 1; i++) {
-                min = employees.get(i);
+
+            for (int i = 0; i < clone.size() - 1; i++) {
+                min = clone.get(i);
                 index = i;
 
-                for (int j = i + 1; j < employees.size(); j++) {
-                    if (min.id < employees.get(j).id) {
-                        min = employees.get(j);
+                for (int j = i + 1; j < clone.size(); j++) {
+                    if (min.getId() < clone.get(j).getId()) {
+                        min = clone.get(j);
                         index = j;
                     }
                 }
 
                 if (index != i) {
-                    employees.set(index, employees.get(i));
-                    employees.set(i, min);
+                    clone.set(index, clone.get(i));
+                    clone.set(i, min);
                 }
             }
+
+            return clone;
         };
 
         Sortable insertion = (ArrayList<Employee> employees) -> {
+            ArrayList<Employee> clone = new ArrayList<Employee>(employees);
             Employee min;
-            for (int i = 1; i < employees.size(); i++) {
-                min = employees.get(i);
 
+            for (int i = 1; i < clone.size(); i++) {
+                min = clone.get(i);
                 int j = i - 1;
-                while ((j > -1) && (employees.get(j).id < min.id)) {
-                    employees.set(j + 1, employees.get(j));
+
+                while ((j > -1) && (clone.get(j).getId() < min.getId())) {
+                    clone.set(j + 1, clone.get(j));
                     j--;
                 }
 
-                employees.set(j + 1, min);
+                clone.set(j + 1, min);
             }
+
+            return clone;
         };
 
-        new Employee(1, "Ba");
-        new Employee(4, "Thư");
-        new Employee(3, "Vương");
-        new Employee(5, "Anh");
-        new Employee(2, "Thư");
+        new Employee("Ba");
+        new Employee("Thư");
+        new Employee("Vương");
+        new Employee("Béo Ú");
 
         System.out.println("Before:");
-        Employee.employees.forEach(e -> e.print());
+        Employee.getAll().forEach(e -> e.print());
 
         System.out.println("\nSelection Sort: ");
-        Employee.sorter = selection;
-        Employee.sort();
-        Employee.employees.forEach(e -> e.print());
+        Employee.setSorter(selection);
+        Employee.sort().forEach(e -> e.print());
 
         System.out.println("\nBubble Sort: ");
-        Employee.sorter = bubble;
-        Employee.sort();
-        Employee.employees.forEach(e -> e.print());
+        Employee.setSorter(bubble);
+        Employee.sort().forEach(e -> e.print());
 
         System.out.println("\nInsertion Sort: ");
-        Employee.sorter = insertion;
-        Employee.sort();
-        Employee.employees.forEach(e -> e.print());
+        Employee.setSorter(insertion);
+        Employee.sort().forEach(e -> e.print());
+
+        System.out.println("\nAfter:");
+        Employee.getAll().forEach(e -> e.print());
     }
 }

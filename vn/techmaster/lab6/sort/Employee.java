@@ -3,23 +3,60 @@ package vn.techmaster.lab6.sort;
 import java.util.ArrayList;
 
 public class Employee {
-    public int id;
-    public String name;
+    private static ArrayList<Employee> employees = new ArrayList<>();
+    private static Sortable sorter;
+    private static int count = 0;
+    private int id;
+    private String name;
 
-    public static ArrayList<Employee> employees = new ArrayList<>();
-    public static Sortable sorter;
+    // static
+    public static int total() {
+        return count;
+    }
 
-    Employee(int id, String name) {
-        this.id = id;
+    public static ArrayList<Employee> getAll() {
+        return employees;
+    }
+
+    public static void setSorter(Sortable sortable) {
+        sorter = sortable;
+    }
+
+    public static ArrayList<Employee> sort() {
+        return sorter.sort(employees);
+    }
+
+    // private
+    private int getNewId() {
+        return count++;
+    }
+
+    // get
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    // set
+    public void setName(String name) {
         this.name = name;
+    }
 
+    private void setId() {
+        this.id = this.getNewId();
+    }
+
+    // constructor
+    Employee(String name) {
+        this.setId();
+        this.setName(name);
         employees.add(this);
     }
 
-    public static void sort() {
-        sorter.sort(employees);
-    }
-
+    // other
     void print() {
         System.out.println(this.id + " " + this.name);
     }
