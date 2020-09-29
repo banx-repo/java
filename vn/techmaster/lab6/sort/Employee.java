@@ -1,7 +1,6 @@
 package vn.techmaster.lab6.sort;
 
 import java.util.ArrayList;
-import vn.techmaster.lab6.sort.sorter.Sortable;
 
 public class Employee {
     public int id;
