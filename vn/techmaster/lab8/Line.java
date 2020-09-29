@@ -1,4 +1,4 @@
-package vn.techmaster.Lab8;
+package vn.techmaster.lab8;
 
 public class Line {
     public static void main(String[] args) {

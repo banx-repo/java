@@ -1,4 +1,4 @@
-package vn.techmaster.Lab8;
+package vn.techmaster.lab8;
 
 public class Ticket {
     private static int _count = 0;

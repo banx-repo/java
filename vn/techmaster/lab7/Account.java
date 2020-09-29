@@ -1,4 +1,4 @@
-package vn.techmaster.Lab7;
+package vn.techmaster.lab7;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

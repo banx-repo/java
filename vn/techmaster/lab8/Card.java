@@ -1,4 +1,4 @@
-package vn.techmaster.Lab8;
+package vn.techmaster.lab8;
 
 public class Card extends Ticket {
     private double _balance;
