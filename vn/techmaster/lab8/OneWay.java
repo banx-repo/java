@@ -1,27 +1,18 @@
 package vn.techmaster.lab8;
 
 public class OneWay extends Ticket {
-    private Gate _entry;
-    private Gate _destination;
-
-    private void setEntry(Gate entry) {
-        this._entry = entry;
+    OneWay(Gate origin, double balance) {
+        super(balance);
+        this.setOrigin(origin);
     }
 
-    private void setDestination(Gate destination) {
-        this._destination = destination;
+    @Override
+    public String toString() {
+        return "Gate: " + (this.getOrigin() != null ? this.getOrigin().getName() : "");
     }
 
-    Gate getEntry() {
-        return this._entry;
-    }
-
-    Gate getDestination() {
-        return this._destination;
-    }
-
-    OneWay(Gate entry, Gate destination) {
-        this.setEntry(entry);
-        this.setDestination(destination);
+    @Override
+    public void updateValid() {
+        this.setValid(false);
     }
 }

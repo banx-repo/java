@@ -1,39 +1,71 @@
 package vn.techmaster.lab8;
 
-public class Ticket {
-    private static int _count = 0;
-    private int _id;
-    private boolean _active;
+public abstract class Ticket {
+    private static int count = 0;
+    private int id;
+    private Gate origin = null;
+    private boolean valid;
+    private double balance;
 
-    int total() {
-        return _count;
+    // static
+    public static int total() {
+        return count;
     }
 
-    private int _newId() {
-        return _count++;
+    // get
+    private int newId() {
+        return count++;
     }
 
-    private void setActive(boolean active) {
-        this._active = active;
+    public int getId() {
+        return this.id;
     }
 
-    int getId() {
-        return this._id;
+    public double getBalance() {
+        return this.balance;
     }
 
-    boolean isActive() {
-        return this._active;
+    public Gate getOrigin() {
+        return this.origin;
     }
 
-    void deactive() {
-        this.setActive(false);
+    public boolean isValid() {
+        return this.valid;
+    };
+
+    // set
+    private void setId(int id) {
+        this.id = id;
     }
 
-    void active() {
-        this.setActive(true);
+    protected void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    Ticket() {
-        this._id = this._newId();
+    public void setOrigin(Gate origin) {
+        this.origin = origin;
     }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    };
+
+    // constructor
+    Ticket(double balance) {
+        this.setId(this.newId());
+        this.setValid(true);
+        this.setBalance(balance);
+    }
+
+    // method
+    @Override
+    public String toString() {
+        return "Gate: " + (origin != null ? origin.getName() : "");
+    }
+
+    public void changeBalance(double value) {
+        System.out.println("Do not support this method!");
+    }
+
+    public abstract void updateValid();
 }

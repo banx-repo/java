@@ -1,45 +1,80 @@
 package vn.techmaster.lab8;
 
 public class Gate {
-    private static int _count = 0;
-    private int _id;
-    private String _name;
-    private boolean _open;
+    private static int count = 0;
+    private int id;
+    private String name;
+    private boolean open;
 
-    static int total() {
-        return _count;
+    // static
+    public static int total() {
+        return count;
     }
 
-    private int _newId() {
-        return _count++;
+    // get
+    private int newId() {
+        return count++;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean isOpen() {
+        return this.open;
+    }
+
+    // set
+    private void setId(int id) {
+        this.id = id;
     }
 
     private void setOpen(boolean open) {
-        this._open = open;
+        this.open = open;
     }
 
-    int getId() {
-        return this._id;
-    }
-
-    String getName() {
-        return this._name;
-    }
-
-    boolean isOpen() {
-        return this._open;
-    }
-
-    void open() {
+    public void open() {
         this.setOpen(true);
     }
 
-    void close() {
+    public void close() {
         this.setOpen(false);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // constructor
     Gate(String name) {
-        this._name = name;
-        this._id = this._newId();
+        this.setId(this.newId());
+        this.setName(name);
+    }
+
+    // method
+    @Override
+    public String toString() {
+        return "Gate " + this.getName() + " is " + this.isOpen();
+    }
+
+    public void enter(Ticket ticket) {
+        if (ticket.isValid()) {
+            open();
+            ticket.setOrigin(this);
+        } else {
+            close();
+        }
+    }
+
+    public void exit(Ticket ticket) {
+        Gate origin = ticket.getOrigin();
+
+        if (origin != null) {
+            
+        }
     }
 }

@@ -1,23 +1,19 @@
 package vn.techmaster.lab8;
 
 public class Card extends Ticket {
-    private double _balance;
-
-    private void setBalance(double balance) {
-        this._balance = balance;
-    }
-
-    double getBalance() {
-        return this._balance;
-    }
-
-    boolean isAtive() {
-        return this._balance <= 0;
-    }
-
-    
-
+    // constructor
     Card(double balance) {
-        this.setBalance(balance);
+        super(balance);
+    }
+
+    // method
+    @Override
+    public void changeBalance(double value) {
+        this.setBalance(this.getBalance() + value);
+    }
+
+    @Override
+    public void updateValid() {
+        this.setValid(this.getBalance() > 0);
     }
 }
