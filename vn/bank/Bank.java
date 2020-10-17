@@ -1,9 +1,9 @@
 package vn.bank;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Bank {
+    private float interestRate = 7.0F;
     private ArrayList<PaymentAccount> paymentAccounts = new ArrayList<>();
     private ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
@@ -17,6 +17,14 @@ public class Bank {
             staffs.add(new Staff("1", "Administrator", "admin", "admin"));
             this.save();
         }
+    }
+
+    public float getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(float interestRate) {
+        this.interestRate = interestRate;
     }
 
     private void init() {
@@ -53,148 +61,37 @@ public class Bank {
             }
         }
 
-        System.out.println("Tài khoản hoặc mật khẩu không hợp lệ!");
+        System.out.println("Tài khoản hoặc mật khẩu không đúng!");
         return null;
     }
 
-    public void openAccount(String uid, String name, String username, String password) {
+    public boolean exists(String uid, String username) {
         for (Customer c : customers) {
             if (c.getUID().equals(uid) || c.getUsername().equals(username)) {
-                System.out.println("ID hoặc tài khoản đã tồn tại!");
+                return true;
             }
         }
 
-        Customer c = new Customer(uid, name, username, password);
+        return false;
+    }
+
+    public void addCustomer(Customer c) {
         this.customers.add(c);
-        PaymentAccount p = new PaymentAccount(uid);
-        this.paymentAccounts.add(p);
-        c.setPaymentAccount(p);
-        System.out.println("Tạo tài khoản thành công!");
+        this.paymentAccounts.add(c.getPaymentAccount());
     }
 
-    public void openSavingAccount(Customer c, long value, int period) {
-        try {
-            c.getPaymentAccount().withdraw(value);
-            SavingAccount s = new SavingAccount(c.getUID() + (c.getSavingAccounts().size() + 1), c.getUID(), value,
-                    period, LocalDate.now());
-            c.setSavingAccounts(s);
-            this.savingAccounts.add(s);
-            System.out.println("Mở tài khoản tiết kiệm thành công.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+    public void addSavingAccount(SavingAccount sa) {
+        this.savingAccounts.add(sa);
     }
 
-    public void openSavingAccount(String uid, long balance, float interestRate, int period) {
+    public Customer getCustomer(String uid) {
         for (Customer c : customers) {
             if (c.getUID().equals(uid)) {
-                String aid = c.getUID() + (c.getSavingAccounts().size() + 1);
-                SavingAccount s = new SavingAccount(aid, uid, balance, interestRate, period, LocalDate.now());
-                c.setSavingAccounts(s);
-                this.savingAccounts.add(s);
-                System.out.println("Mở tài khoản tiết kiệm thành công.");
-                return;
+                return c;
             }
         }
 
-        System.out.println("Chưa có tài khoản, yêu cầu mở tài khoản trước.");
-        return;
-    }
-
-    public void showPaymentAccount(String uid) {
-        for (PaymentAccount p : paymentAccounts) {
-            if (p.getUID().equals(uid)) {
-                PaymentAccount.title();
-                p.details();
-                return;
-            }
-        }
-
-        System.out.println("Tài khoản không tồn tại!");
-        return;
-    }
-
-    public void showSavingAccounts(String uid) {
-        Boolean hasAccount = false;
-        for (SavingAccount a : savingAccounts) {
-            if (a.getUID().equals(uid)) {
-                hasAccount = true;
-                break;
-            }
-        }
-
-        if (hasAccount) {
-            SavingAccount.title();
-            for (SavingAccount a : savingAccounts) {
-                a.details();
-            }
-        } else {
-            System.out.println("Chưa có tài khoản tiết kiệm nào!");
-        }
-    }
-
-    public void deposit(String uid, long value) {
-        for (PaymentAccount p : paymentAccounts) {
-            if (p.getUID().equals(uid)) {
-                p.deposit(value);
-                System.out.println("Gửi tiền vào tài khoản thành công!");
-                return;
-            }
-        }
-        System.out.println("Nạp tiền thất bại, kiểm tra lại tài khoản.");
-        return;
-    }
-
-    public void withdraw(String uid, long value) {
-        for (PaymentAccount p : paymentAccounts) {
-            if (p.getUID().equals(uid)) {
-                try {
-                    p.withdraw(value);
-                    System.out.println("Rút tiền thành công!");
-                    return;
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                    return;
-                }
-            }
-        }
-        System.out.println("Rút tiền thất bại, kiểm tra lại số tài khoản.");
-        return;
-    }
-
-    public void getInterest(String uid, String aid) {
-        Customer customer = null;
-        SavingAccount account = null;
-
-        for (Customer c : customers) {
-            if (c.getUID().equals(uid)) {
-                customer = c;
-                break;
-            }
-        }
-
-        if (customer == null) {
-            System.out.println("Tài khoản không tồn tại");
-            return;
-        }
-
-        for (SavingAccount a : customer.getSavingAccounts()) {
-            if (a.getAID().equals(aid)) {
-                account = a;
-            }
-        }
-
-        if (account == null) {
-            System.out.println("Số tài khoản tiết kiệm không đúng");
-            return;
-        }
-
-        Double interest = account.getInterest();
-
-        if (interest != null) {
-            customer.getPaymentAccount().deposit(interest.longValue());
-            System.out.println("Lĩnh tiền lãi oke");
-        }
+        return null;
     }
 
     public void closeSavingAccount(String uid, String aid) {

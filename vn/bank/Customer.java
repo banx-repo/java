@@ -1,13 +1,14 @@
 package vn.bank;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Customer extends User {
     private PaymentAccount paymentAccount = null;
     private ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
 
-    Customer(String id, String name, String username, String password) {
-        super(id, name, username, password, Role.CUSTOMER);
+    Customer(String uid, String name, String username, String password) {
+        super(uid, name, username, password, Role.CUSTOMER);
     }
 
     public PaymentAccount getPaymentAccount() {
@@ -67,6 +68,21 @@ public class Customer extends User {
             }
         } else {
             System.out.println("Số tài khoản không đúng");
+        }
+    }
+
+    public SavingAccount openSavingAccount(long value, float rate, int period) {
+        String aid = this.getUID() + (this.getSavingAccounts().size() + 1);
+
+        try {
+            this.getPaymentAccount().withdraw(value);
+            SavingAccount s = new SavingAccount(aid, this.getUID(), value, rate, period, LocalDate.now());
+            this.setSavingAccounts(s);
+            System.out.println("Mở tài khoản tiết kiệm thành công!");
+            return s;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 

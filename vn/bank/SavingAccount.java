@@ -9,14 +9,6 @@ public class SavingAccount extends Account {
     private LocalDate date;
     private String state;
 
-    SavingAccount(String aid, String uid, long balance, int period, LocalDate date) {
-        super(uid, balance);
-        this.setAID(aid);
-        this.setPeriod(period);
-        this.setDate(date);
-        this.setState("active");
-    }
-
     SavingAccount(String aid, String uid, long balance, float interestRate, int period, LocalDate date) {
         super(uid, balance);
         this.setAID(aid);

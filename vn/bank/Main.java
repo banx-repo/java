@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Bank bank = new Bank();
-        User user = null;
+        Staff staff = null;
+        Customer customer = null;
         Help help = new Help();
         Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
@@ -29,7 +30,7 @@ public class Main {
             }
 
             if ("help".equals(s)) {
-                help.print(user);
+                help.print(staff == null ? customer : staff);
                 continue;
             }
 
@@ -39,137 +40,157 @@ public class Main {
                 continue;
             }
 
-            String uid;
-            String aid;
-            String name;
-            String username;
-            String password;
-            String value;
-            String period;
-            String rate;
-            String show;
+            String uid = parser.uid(s);
+            String aid = parser.aid(s);
+            String name = parser.name(s);
+            String username = parser.username(s);
+            String password = parser.password(s);
+            String value = parser.value(s);
+            String period = parser.period(s);
+            String rate = parser.rate(s);
+            String show = parser.show(s);
 
             switch (command) {
                 case "signin":
-                    if (user != null) {
+                    if (staff != null || customer != null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    username = parser.username(s);
-                    password = parser.password(s);
+                    System.out.printf(username == null ? "'-u' không hợp lệ\n" : "");
+                    System.out.printf(password == null ? "'-p' không hợp lệ\n" : "");
 
                     if (username != null && password != null) {
-                        user = bank.signin(username, password);
+                        User user = bank.signin(username, password);
+                        if (user != null && user.getRole() == Role.CUSTOMER) {
+                            customer = (Customer) user;
+                        } else if (user != null && user.getRole() == Role.STAFF) {
+                            staff = (Staff) user;
+                        }
                     }
 
                     break;
 
                 case "signout":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    user = null;
+                    staff = null;
+                    customer = null;
                     System.out.println("Đăng xuất thành công");
                     break;
 
                 case "create":
-                    if (user == null || user.getRole() == Role.CUSTOMER) {
+                    if (staff == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    uid = parser.uid(s);
-                    name = parser.name(s);
-                    username = parser.username(s);
-                    password = parser.password(s);
+                    System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                    System.out.printf(name == null ? "'-n' không hợp lệ\n" : "");
+                    System.out.printf(username == null ? "'-u' không hợp lệ\n" : "");
+                    System.out.printf(password == null ? "'-p' không hợp lệ\n" : "");
 
                     if (uid != null && name != null && username != null && password != null) {
-                        String[] temp = name.split(" ");
-
-                        for (int i = 0; i < temp.length; i++) {
-                            temp[i] = temp[i].substring(0, 1).toUpperCase() + temp[i].substring(1);
+                        if (bank.exists(uid, username)) {
+                            System.out.println("UID hoặc username đã tồn tại");
+                        } else {
+                            name = Util.capitalize(name);
+                            Customer c = staff.create(uid, name, username, password);
+                            bank.addCustomer(c);
+                            bank.save();
+                            System.out.println("Tạo tài khoản thành công");
                         }
-
-                        name = String.join(" ", temp);
-                        bank.openAccount(uid, name, username, password);
-                        bank.save();
                     }
 
                     break;
 
                 case "show":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    show = parser.show(s);
+                    System.out.printf(show == null ? "Lệnh 'show' không hợp lệ\n" : "");
 
-                    if (show == null) {
-                        System.out.println("Syntax error");
-                        break;
-                    }
-
-                    if (user.getRole() == Role.CUSTOMER) {
-                        Customer customer = (Customer) user;
+                    if (customer != null) {
                         if ("-s".equals(show)) {
                             customer.showSavingAccounts();
-                        } else {
+                        } else if ("-p".equals(show)) {
                             customer.showPaymentAccount();
                         }
-                    } else {
-                        uid = parser.uid(s);
+                    }
 
-                        if (uid == null) {
-                            System.out.println("Syntax error");
+                    if (staff != null) {
+                        System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+
+                        Customer c = bank.getCustomer(uid);
+
+                        if (c == null) {
+                            System.out.println("UID không tồn tại");
                             break;
                         }
 
-                        if ("-s".equals(show)) {
-                            bank.showSavingAccounts(uid);
+                        if ("-p".equals(show)) {
+                            staff.showPaymentAccount(c);
+                        } else if ("-s".equals(show)) {
+                            staff.showSavingAccount(c);
                         } else {
-                            bank.showPaymentAccount(uid);
+                            System.out.println("Số tài khoản không hợp lệ");
                         }
                     }
 
                     break;
 
                 case "deposit":
-                    if (user == null || user.getRole() == Role.CUSTOMER) {
+                    if (staff == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    uid = parser.uid(s);
-                    value = parser.value(s);
+                    System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                    System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
 
                     if (uid != null && value != null) {
-                        bank.deposit(uid, Long.parseLong(value));
+                        Customer c = bank.getCustomer(uid);
+
+                        if (c == null) {
+                            System.out.println("UID không tồn tại");
+                            break;
+                        }
+
+                        staff.deposit(c, Long.parseLong(value));
                         bank.save();
+                        System.out.println("Gửi tiền vào tài khoản thành công");
                     }
 
                     break;
 
                 case "withdraw":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    if (user.getRole() == Role.CUSTOMER) {
-                        Customer c = (Customer) user;
-                        value = parser.value(s);
-                        c.withdraw(Long.parseLong(value));
+                    if (customer != null) {
+                        System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
+                        customer.withdraw(Long.parseLong(value));
                         bank.save();
-                    } else {
-                        uid = parser.uid(s);
-                        value = parser.value(s);
+                    } else if (staff != null) {
+                        System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                        System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
 
                         if (uid != null && value != null) {
-                            bank.withdraw(uid, Long.parseLong(value));
+                            Customer c = bank.getCustomer(uid);
+
+                            if (c == null) {
+                                System.out.println("UID không tồn tại");
+                                break;
+                            }
+
+                            staff.withdraw(c, Long.parseLong(value));
                             bank.save();
                         }
                     }
@@ -177,56 +198,76 @@ public class Main {
                     break;
 
                 case "saving":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    if (user.getRole() == Role.CUSTOMER) {
-                        value = parser.value(s);
-                        period = parser.period(s);
+                    if (customer != null) {
+                        System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
+                        System.out.printf(period == null ? "'-pr' không hợp lệ\n" : "");
+
                         if (value != null && period != null) {
-                            Customer c = (Customer) user;
-                            bank.openSavingAccount(c, Long.parseLong(value), Integer.parseInt(period));
-                            bank.save();
+                            SavingAccount sa = customer.openSavingAccount(Long.parseLong(value), bank.getInterestRate(),
+                                    Integer.parseInt(period));
+
+                            if (sa != null) {
+                                bank.addSavingAccount(sa);
+                                bank.save();
+                            }
                         }
+                    } else if (staff != null) {
+                        System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                        System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
+                        System.out.printf(period == null ? "'-pr' không hợp lệ\n" : "");
+                        System.out.printf(rate == null ? "'-ir' không hợp lệ\n" : "");
 
-                        break;
-                    }
+                        if (uid != null && value != null && period != null && rate != null) {
+                            Customer c = bank.getCustomer(uid);
+                            
+                            if (c == null) {
+                                System.out.println("UID không tồn tại");
+                                break;
+                            }
 
-                    uid = parser.uid(s);
-                    value = parser.value(s);
-                    period = parser.period(s);
-                    rate = parser.rate(s);
+                            SavingAccount sa = staff.openSavingAccount(c, Long.parseLong(value), Float.parseFloat(rate),
+                                    Integer.parseInt(period));
 
-                    if (uid != null && value != null && period != null && rate != null) {
-                        bank.openSavingAccount(uid, Long.parseLong(value), Float.parseFloat(rate),
-                                Integer.parseInt(period));
-                        bank.save();
+                            if (sa != null) {
+                                bank.addSavingAccount(sa);
+                                bank.save();
+                            }
+                        }
                     }
 
                     break;
 
                 case "getinterest":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    if (user.getRole() == Role.CUSTOMER) {
-                        aid = parser.aid(s);
+                    if (customer != null) {
+                        System.out.printf(aid == null ? "'-aid' không hợp lệ\n" : "");
+
                         if (aid != null) {
-                            Customer c = (Customer) user;
-                            c.getInterest(aid);
+                            customer.getInterest(aid);
                             bank.save();
                         }
-                        break;
-                    } else {
-                        uid = parser.uid(s);
-                        aid = parser.aid(s);
+                    } else if (staff != null) {
+                        System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                        System.out.printf(aid == null ? "'-aid' không hợp lệ\n" : "");
 
                         if (uid != null && aid != null) {
-                            bank.getInterest(uid, aid);
+                            Customer c = bank.getCustomer(uid);
+
+                            if (c == null) {
+                                System.out.println("UID không tồn tại");
+                                break;
+                            }
+
+                            staff.getInterest(c, aid);
                             bank.save();
                         }
                     }
@@ -234,25 +275,31 @@ public class Main {
                     break;
 
                 case "closesaving":
-                    if (user == null) {
+                    if (staff == null && customer == null) {
                         System.out.println("Unauthorized");
                         break;
                     }
 
-                    if (user.getRole() == Role.CUSTOMER) {
-                        Customer c = (Customer) user;
-                        aid = parser.aid(s);
-                        
+                    if (customer != null) {
+                        System.out.printf(aid == null ? "'-aid' không hợp lệ\n" : "");
+
                         if (aid != null) {
-                            c.closeSavingAccount(aid);
+                            customer.closeSavingAccount(aid);
                             bank.save();
                         }
                     } else {
-                        uid = parser.uid(s);
-                        aid = parser.aid(s);
+                        System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
+                        System.out.printf(aid == null ? "'-aid' không hợp lệ\n" : "");
 
                         if (uid != null && aid != null) {
-                            bank.closeSavingAccount(uid, aid);
+                            Customer c = bank.getCustomer(uid);
+
+                            if (c == null) {
+                                System.out.println("UID không tồn tại");
+                                break;
+                            }
+                            
+                            staff.closeSavingAccount(c, aid);
                             bank.save();
                         }
                     }
