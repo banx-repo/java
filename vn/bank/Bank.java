@@ -93,37 +93,4 @@ public class Bank {
 
         return null;
     }
-
-    public void closeSavingAccount(String uid, String aid) {
-        Customer customer = null;
-        SavingAccount account = null;
-
-        for (Customer c : customers) {
-            if (c.getUID().equals(uid)) {
-                customer = c;
-                break;
-            }
-        }
-
-        if (customer == null) {
-            System.out.println("Tài khoản không tồn tại");
-            return;
-        }
-
-        for (SavingAccount a : customer.getSavingAccounts()) {
-            if (a.getAID().equals(aid)) {
-                account = a;
-            }
-        }
-
-        if (account == null) {
-            System.out.println("Số tài khoản tiết kiệm không đúng");
-            return;
-        }
-
-        customer.getPaymentAccount().deposit(account.finalSettlement());
-        customer.getSavingAccounts().remove(account);
-        account.setState("close");
-        System.out.println("Tất toán tài khoản tiết kiệm thành công");
-    }
 }
