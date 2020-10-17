@@ -72,9 +72,8 @@ public class Customer extends User {
     }
 
     public SavingAccount openSavingAccount(long value, float rate, int period) {
-        SavingAccount sa = this.getSavingAccounts().get(this.getSavingAccounts().size() - 1);
-
-        String aid = this.getUID() + (Integer.parseInt(sa.getAID().substring(sa.getAID().length() - 1)) + 1);
+        // Lỗi khi tạo tài khoản mà không có tài khoản mặc định
+        String aid = this.getUID() + (this.getSavingAccounts().size() + 1);
 
         try {
             this.getPaymentAccount().withdraw(value);
