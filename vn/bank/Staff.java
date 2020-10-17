@@ -5,7 +5,7 @@ public class Staff extends User {
         super(uid, name, username, password, Role.STAFF);
     }
 
-    public Customer create(String uid, String name, String username, String password) {
+    public Customer createAccount(String uid, String name, String username, String password) {
         Customer c = new Customer(uid, name, username, password);
         PaymentAccount p = new PaymentAccount(uid);
         c.setPaymentAccount(p);

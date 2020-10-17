@@ -98,7 +98,7 @@ public class Main {
                             System.out.println("UID hoặc username đã tồn tại");
                         } else {
                             name = Util.capitalize(name);
-                            Customer c = staff.create(uid, name, username, password);
+                            Customer c = staff.createAccount(uid, name, username, password);
                             bank.addCustomer(c);
                             bank.save();
                             System.out.println("Tạo tài khoản thành công");
