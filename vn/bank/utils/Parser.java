@@ -1,4 +1,4 @@
-package vn.bank;
+package vn.bank.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,16 +42,16 @@ public class Parser {
         return parse(Regex.PASSWORD, s);
     }
 
+    public String newpass(String s) {
+        return parse(Regex.NEW, s);
+    }
+
     public String value(String s) {
         return parse(Regex.VALUE, s);
     }
 
     public String period(String s) {
         return parse(Regex.PERIOD, s);
-    }
-
-    public String rate(String s) {
-        return parse(Regex.RATE, s);
     }
 
     public String show(String s) {

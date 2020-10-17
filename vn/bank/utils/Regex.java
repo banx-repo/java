@@ -1,4 +1,4 @@
-package vn.bank;
+package vn.bank.utils;
 
 public enum Regex {
     COMMAND("^([a-z]+)[ ]*"),
@@ -9,9 +9,9 @@ public enum Regex {
     PASSWORD("-p ([a-z0-9]+)( -|$)"),
     VALUE("-v ([0-9]+)( -|$)"),
     PERIOD("-pr ([0-9]+)( -|$)"),
-    RATE("-ir ([0-9.]+)( -|$)"),
     PAYMENT(" (-p)( -|$)"),
-    ACCOUNT(" (-s)( -|$)");
+    ACCOUNT(" (-s)( -|$)"),
+    NEW("-new ([a-z0-9]+)( -|$)");
 
     private String reg;
 

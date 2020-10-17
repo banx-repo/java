@@ -7,7 +7,7 @@ public class Customer extends User {
     private PaymentAccount paymentAccount = null;
     private ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
 
-    Customer(String uid, String name, String username, String password) {
+    public Customer(String uid, String name, String username, String password) {
         super(uid, name, username, password, Role.CUSTOMER);
     }
 

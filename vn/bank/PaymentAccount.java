@@ -5,7 +5,7 @@ public class PaymentAccount extends Account {
         super(uid);
     }
 
-    PaymentAccount(String uid, long balance) {
+    public PaymentAccount(String uid, long balance) {
         super(uid, balance);
     }
 

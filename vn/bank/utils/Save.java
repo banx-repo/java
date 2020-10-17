@@ -1,9 +1,14 @@
-package vn.bank;
+package vn.bank.utils;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import vn.bank.Customer;
+import vn.bank.PaymentAccount;
+import vn.bank.SavingAccount;
+import vn.bank.Staff;
 
 public class Save extends Thread {
     ArrayList<PaymentAccount> paymentAccounts;
@@ -11,7 +16,7 @@ public class Save extends Thread {
     ArrayList<Customer> customers;
     ArrayList<Staff> staffs;
 
-    Save(ArrayList<PaymentAccount> paymentAccounts, ArrayList<SavingAccount> savingAccounts,
+    public Save(ArrayList<PaymentAccount> paymentAccounts, ArrayList<SavingAccount> savingAccounts,
             ArrayList<Customer> customers, ArrayList<Staff> staffs) {
         this.paymentAccounts = paymentAccounts;
         this.savingAccounts = savingAccounts;

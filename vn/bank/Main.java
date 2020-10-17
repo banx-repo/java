@@ -2,6 +2,10 @@ package vn.bank;
 
 import java.util.Scanner;
 
+import vn.bank.utils.Help;
+import vn.bank.utils.Parser;
+import vn.bank.utils.Util;
+
 public class Main {
     public static void main(String[] args) {
         Bank bank = new Bank();
@@ -47,8 +51,8 @@ public class Main {
             String password = parser.password(s);
             String value = parser.value(s);
             String period = parser.period(s);
-            String rate = parser.rate(s);
             String show = parser.show(s);
+            String newpass = parser.newpass(s);
 
             switch (command) {
                 case "signin":
@@ -220,17 +224,16 @@ public class Main {
                         System.out.printf(uid == null ? "'-uid' không hợp lệ\n" : "");
                         System.out.printf(value == null ? "'-v' không hợp lệ\n" : "");
                         System.out.printf(period == null ? "'-pr' không hợp lệ\n" : "");
-                        System.out.printf(rate == null ? "'-ir' không hợp lệ\n" : "");
 
-                        if (uid != null && value != null && period != null && rate != null) {
+                        if (uid != null && value != null && period != null) {
                             Customer c = bank.getCustomer(uid);
-                            
+
                             if (c == null) {
                                 System.out.println("UID không tồn tại");
                                 break;
                             }
 
-                            SavingAccount sa = staff.openSavingAccount(c, Long.parseLong(value), Float.parseFloat(rate),
+                            SavingAccount sa = staff.openSavingAccount(c, Long.parseLong(value), bank.getInterestRate(),
                                     Integer.parseInt(period));
 
                             if (sa != null) {
@@ -298,9 +301,37 @@ public class Main {
                                 System.out.println("UID không tồn tại");
                                 break;
                             }
-                            
+
                             staff.closeSavingAccount(c, aid);
                             bank.save();
+                        }
+                    }
+
+                    break;
+
+                case "changepass":
+                    if (staff == null && customer == null) {
+                        System.out.println("Unauthorized");
+                        break;
+                    }
+
+                    if (customer != null) {
+                        System.out.printf(password == null ? "'-p' không hợp lệ\n" : "");
+                        System.out.printf(newpass == null ? "'-new' không hợp lệ\n" : "");
+                        if (password != null && newpass != null) {
+                            customer.changePassword(password, newpass);
+                            bank.save();
+                            System.out.println("Thay đối mật khẩu thành công");
+                        }
+                    }
+
+                    if (staff != null) {
+                        System.out.printf(password == null ? "'-p' không hợp lệ\n" : "");
+                        System.out.printf(newpass == null ? "'-new' không hợp lệ\n" : "");
+                        if (password != null && newpass != null) {
+                            staff.changePassword(password, newpass);
+                            bank.save();
+                            System.out.println("Thay đối mật khẩu thành công");
                         }
                     }
 

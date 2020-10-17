@@ -9,7 +9,7 @@ public class SavingAccount extends Account {
     private LocalDate date;
     private String state;
 
-    SavingAccount(String aid, String uid, long balance, float interestRate, int period, LocalDate date) {
+    public SavingAccount(String aid, String uid, long balance, float interestRate, int period, LocalDate date) {
         super(uid, balance);
         this.setAID(aid);
         this.setInterestRate(interestRate);

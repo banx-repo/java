@@ -55,8 +55,8 @@ public abstract class User {
         this.role = role;
     }
 
-    public void changePassword(String old, String newPass, String renewPass) throws IllegalArgumentException {
-        if (this.getPassword().equals(old) && (newPass.equals(renewPass))) {
+    public void changePassword(String old, String newPass) throws IllegalArgumentException {
+        if (this.getPassword().equals(old)) {
             this.setPassword(newPass);
         } else {
             throw new IllegalArgumentException("Mật khẩu cũ không đúng, hoặc mật khẩu mới không trùng khớp");

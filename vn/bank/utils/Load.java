@@ -1,4 +1,4 @@
-package vn.bank;
+package vn.bank.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,13 +7,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import vn.bank.Customer;
+import vn.bank.PaymentAccount;
+import vn.bank.SavingAccount;
+import vn.bank.Staff;
+
 public class Load extends Thread {
     ArrayList<PaymentAccount> paymentAccounts;
     ArrayList<SavingAccount> savingAccounts;
     ArrayList<Customer> customers;
     ArrayList<Staff> staffs;
 
-    Load(ArrayList<PaymentAccount> paymentAccounts, ArrayList<SavingAccount> savingAccounts, ArrayList<Customer> customers, ArrayList<Staff> staffs) {
+    public Load(ArrayList<PaymentAccount> paymentAccounts, ArrayList<SavingAccount> savingAccounts, ArrayList<Customer> customers, ArrayList<Staff> staffs) {
         this.paymentAccounts = paymentAccounts;
         this.savingAccounts = savingAccounts;
         this.customers = customers;

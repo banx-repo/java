@@ -1,4 +1,4 @@
-package vn.bank;
+package vn.bank.utils;
 
 public class Util {
     public static String capitalize(String name) {

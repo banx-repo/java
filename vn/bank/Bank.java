@@ -2,8 +2,12 @@ package vn.bank;
 
 import java.util.ArrayList;
 
+import vn.bank.utils.Load;
+import vn.bank.utils.Save;
+
 public class Bank {
     private float interestRate = 7.0F;
+    private float loanInterestRate = 8.0F;
     private ArrayList<PaymentAccount> paymentAccounts = new ArrayList<>();
     private ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
@@ -23,8 +27,16 @@ public class Bank {
         return interestRate;
     }
 
+    public float getLoanInterestRate() {
+        return loanInterestRate;
+    }
+
     public void setInterestRate(float interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public void setLoanInterestRate(float loanInterestRate) {
+        this.loanInterestRate = loanInterestRate;
     }
 
     private void init() {
