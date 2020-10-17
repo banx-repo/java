@@ -6,29 +6,29 @@ import vn.bank.User;
 public class Help {
     public void print(User user) {
         if (user == null) {
-            System.out.println("Đăng nhập: signin -u username -p password");
+            System.out.println("Đăng nhập: \n\tsignin -u username -p password");
 
         } else if (user.getRole() == Role.CUSTOMER) {
-            System.out.println("Nhập 'signout' để đăng xuất");
-            System.out.println("Xem tài khoản thanh toán: show -p");
-            System.out.println("Xem tài khoản tiết kiệm: show -s");
-            System.out.println("Rút tiền từ tài khoản: withdraw -v value");
-            System.out.println("Mở tài khoản tiết kiệm: saving -v value -pr period");
-            System.out.println("Lĩnh tiền lãi từ tài khoản tiết kiệm: getinterest -aid aid");
-            System.out.println("Tất toán tài khoản tiết kiệm: closesaving -aid aid");
-            System.out.println("Thay đổi mật khẩu tài khoản: changepass -p password -new newpass");
+            System.out.println("\nNhập 'signout' để đăng xuất");
+            System.out.println("\nXem tài khoản thanh toán:\n\tshow -p");
+            System.out.println("\nXem tài khoản tiết kiệm: \n\tshow -s");
+            System.out.println("\nRút tiền từ tài khoản: \n\twithdraw -v value");
+            System.out.println("\nMở tài khoản tiết kiệm: \n\tsaving -v value -pr period");
+            System.out.println("\nLĩnh tiền lãi từ tài khoản tiết kiệm: \n\tgetinterest -aid aid");
+            System.out.println("\nTất toán tài khoản tiết kiệm: \n\tclosesaving -aid aid");
+            System.out.println("\nThay đổi mật khẩu tài khoản: \n\tchangepass -p password -new newpass");
 
         } else if (user.getRole() == Role.STAFF) {
-            System.out.println("Nhập 'signout' để đăng xuất");
-            System.out.println("Tạo tài khoản: create -uid uid -n name -u username -p password");
-            System.out.println("Xem tài khoản thanh toán: show -p -uid uid");
-            System.out.println("Xem tài khoản tiết kiệm: show -s -uid uid");
-            System.out.println("Gửi tiền vào tài khoản: deposit -uid uid -v value");
-            System.out.println("Rút tiền từ tài khoản: withdraw -uid uid -v value");
-            System.out.println("Mở tài khoản tiết kiệm: saving -uid id -v value -pr period");
-            System.out.println("Lĩnh tiền lãi từ tài khoản tiết kiệm: getinterest -uid uid -aid aid");
-            System.out.println("Tất toán tài khoản tiết kiệm: closesaving -uid uid -aid aid");
-            System.out.println("Thay đổi mật khẩu tài khoản: changepass -p password -new newpass");
+            System.out.println("\nNhập 'signout' để đăng xuất");
+            System.out.println("\nTạo tài khoản: \n\tcreate -uid uid -n name -u username -p password");
+            System.out.println("\nXem tài khoản thanh toán: \n\tshow -p -uid uid");
+            System.out.println("\nXem tài khoản tiết kiệm: \n\tshow -s -uid uid");
+            System.out.println("\nGửi tiền vào tài khoản: \n\tdeposit -uid uid -v value");
+            System.out.println("\nRút tiền từ tài khoản: \n\twithdraw -uid uid -v value");
+            System.out.println("\nMở tài khoản tiết kiệm: \n\tsaving -uid id -v value -pr period");
+            System.out.println("\nLĩnh tiền lãi từ tài khoản tiết kiệm: \n\tgetinterest -uid uid -aid aid");
+            System.out.println("\nTất toán tài khoản tiết kiệm: \n\tclosesaving -uid uid -aid aid");
+            System.out.println("\nThay đổi mật khẩu tài khoản: \n\tchangepass -p password -new newpass");
         }
     }
 }
